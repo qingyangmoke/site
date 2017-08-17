@@ -1,0 +1,8 @@
+dist
+node_modules
+.DS_Store
+.idea
+.tiny_playground/
+.tiny_examples/
+.tiny_source_code/
+.tiny_plugins/

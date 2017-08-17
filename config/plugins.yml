@@ -1,0 +1,108 @@
+# _default:
+#   type: dir/node
+#   source: gitlab/link/local
+#   name
+#   icon
+#   link
+#   desc
+
+_default:
+  type: node
+  source: iframe
+  width: 320
+  height: 568
+  demo: demo
+  docs: docs
+
+tinyjs-plugin-extract:
+  name: extract
+  cdn: https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-extract/1.0.6/index.js
+  desc: 画布扩展，获取画布的：Image 对象、base64 格式的图片、像素值等等
+  image: https://zos.alipayobjects.com/rmsportal/nJBojwdMJfUqpCWvwyoA.png
+
+tinyjs-plugin-audio:
+  name: audio
+  cdn: https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-audio/0.0.4/index.js
+  desc: Tiny.js 音效插件
+  image: https://gw.alipayobjects.com/zos/rmsportal/zMJQKshtlGCcVfGJcpvk.jpg
+
+tinyjs-plugin-bitmap-text:
+  cdn: https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-bitmap-text/0.0.3/index.js
+  desc: 位图文字
+  image: https://gw.alipayobjects.com/zos/rmsportal/phHqiahVFMthpTCIGPBz.png
+
+tinyjs-plugin-scroller:
+  cdn: https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-scroller/0.0.1/index.js
+  desc: 滚动插件
+  video: http://p.tb.cn/rmsportal_8509_scroll.mov
+
+tinyjs-plugin-tiling:
+  name: tiling
+  cdn: https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-tiling/0.0.2/index.js
+  desc: A fast way of rendering a tiling image
+  video: http://p.tb.cn/rmsportal_8509_tile.mov
+
+tinyjs-plugin-dust:
+  cdn: https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-dust/0.0.3/index.js
+  desc: 简单粒子
+  video: http://p.tb.cn/rmsportal_8509_dust.mov
+
+tinyjs-plugin-mesh:
+  name: mesh
+  cdn: https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-mesh/0.0.1/index.js
+  desc: 网格插件
+  video: https://gw.alipayobjects.com/os/rmsportal/rfKURkKcjYxfesbTesGi.mp4
+
+tinyjs-plugin-particles:
+  name: particles
+  cdn: https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-particles/0.0.1/index.js
+  desc: A really fast type of the Container built solely for speed
+  image: https://zos.alipayobjects.com/rmsportal/nJBojwdMJfUqpCWvwyoA.png
+
+tinyjs-plugin-keyboard:
+  cdn: https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-keyboard/0.0.1/index.js
+  desc: 键盘控制
+  image: https://gw.alipayobjects.com/zos/rmsportal/NocaNAexyTeRSjEQBfxl.png
+
+tinyjs-plugin-layer:
+  cdn: https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-layer/0.0.1/index.js
+  desc: 集成 Scroller 的显示类
+  image: https://zos.alipayobjects.com/rmsportal/nJBojwdMJfUqpCWvwyoA.png
+
+tinyjs-plugin-dragonbones:
+  cdn: https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-dragonbones/0.0.1/index.js
+  desc: 骨骼动画
+  image: https://zos.alipayobjects.com/rmsportal/nJBojwdMJfUqpCWvwyoA.png
+
+tinyjs-plugin-p2:
+  name: Physics.P2
+  git: https://github.com/qingyangmoke/tinyjs-plugin-p2
+  cdn: https://gw.alipayobjects.com/as/g/tiny-plugins/tinyjs-plugin-p2/0.0.3/index.js
+  desc: 基于 P2 物理引擎
+  image: https://zos.alipayobjects.com/rmsportal/nJBojwdMJfUqpCWvwyoA.png
+
+tinyjs-plugin-ant:
+  name: Physics.Ant
+  git: https://github.com/qingyangmoke/tinyjs-plugin-ant
+  cdn: https://gw.alipayobjects.com/as/g/tiny-plugins/tinyjs-plugin-ant/0.0.5/index.js
+  desc: 基于 ant 简单版物理引擎
+  image: https://zos.alipayobjects.com/rmsportal/nJBojwdMJfUqpCWvwyoA.png
+
+tinyjs-plugin-worldwrap:
+  name: wrap
+  git: https://github.com/qingyangmoke/tinyjs-plugin-worldwrap
+  cdn: https://gw.alipayobjects.com/as/g/tiny-plugins/tinyjs-plugin-worldwrap/0.0.1/index.js
+  desc: world wrap plugin
+  image: https://zos.alipayobjects.com/rmsportal/nJBojwdMJfUqpCWvwyoA.png
+
+tinyjs-plugin-weapon:
+  git: https://github.com/qingyangmoke/tinyjs-plugin-weapon
+  cdn: https://gw.alipayobjects.com/as/g/tiny-plugins/tinyjs-plugin-weapon/0.0.1/index.js
+  desc: 武器发射系统
+  image: https://zos.alipayobjects.com/rmsportal/nJBojwdMJfUqpCWvwyoA.png
+
+tinyjs-plugin-ninepatch:
+  git: https://github.com/qingyangmoke/tinyjs-plugin-ninepatch
+  cdn: https://gw.alipayobjects.com/as/g/tiny-plugins/tinyjs-plugin-ninepatch/0.0.1/index.js
+  desc: 九宫格
+  image: https://zos.alipayobjects.com/rmsportal/nJBojwdMJfUqpCWvwyoA.png

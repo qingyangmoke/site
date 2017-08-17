@@ -1,0 +1,72 @@
+.box-sizing(@sizing:border-box) {
+  -webkit-box-sizing: @sizing;
+}
+
+.box-shadow(@value) {
+  -webkit-box-shadow: @value;
+}
+
+.box-shadow(@value1, @value2) {
+  -webkit-box-shadow: @value1, @value2;
+}
+
+.border-radius(@radius:0) {
+  border-top-left-radius: @radius;
+  border-top-right-radius: @radius;
+  border-bottom-left-radius: @radius;
+  border-bottom-right-radius: @radius;
+  -webkit-background-clip: padding-box;
+}
+
+.display-box() {
+  display: -webkit-box;
+  display: -webkit-flex;
+}
+
+.box-flex(@scale:1) {
+  -webkit-box-flex: @scale;
+  -webkit-flex: @scale;
+}
+
+.box-orient(@orient) {
+  -webkit-box-orient: @orient;
+  box-orient: @orient;
+}
+
+.box-align(@align:center) {
+  -webkit-box-align: @align;
+  -webkit-align-items: @align;
+}
+
+.transform(@value) {
+  -webkit-transform: @value;
+}
+
+.transition(@value) {
+  -webkit-transition: @value;
+}
+
+.float-clear() {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+.background-position(@positionX:center, @positionY:center) {
+  background-size: 100% auto;
+  background-position: @positionX @positionY;
+  background-repeat: no-repeat;
+}
+
+//-- 文字自动截取 --
+.ellipsis() {
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,263 @@
+# _default:
+#   type: dir/node
+#   source: gitlab/link/local
+#   name
+#   icon
+#   link
+#   desc
+
+_default:
+  type: node
+  source: gitlab
+
+introduction:
+  name: 简介
+  link: tiny/docs:tutorial/introduction.md
+
+start:
+  name: 快速上手
+  link: tiny/docs:tutorial/start.md
+
+basics:
+  name: 入门
+  link: tiny/docs:tutorial/basics.md
+
+changelog:
+  source: gitlab
+  name: 更新日志
+  link: tiny/tiny:CHANGELOG.md
+
+advanced-startup:
+  name: 启动参数
+  link: tiny/docs:tutorial/advanced/startup.md
+
+advanced-application:
+  type: dir
+  name: Application
+  nodes:
+    - path: advanced/application/intro
+      name: Application 类
+      link: tiny/docs:tutorial/advanced/application/intro.md
+    - path: advanced/application/control
+      name: 游戏控制
+      link: tiny/docs:tutorial/advanced/application/control.md
+    - path: advanced/application/scheduling
+      name: 主调度
+      link: tiny/docs:tutorial/advanced/application/scheduling.md
+    - path: advanced/application/scene
+      name: 场景切换
+      link: tiny/docs:tutorial/advanced/application/scene.md
+    - path: advanced/application/renderer
+      name: renderer 对象
+      link: tiny/docs:tutorial/advanced/application/renderer.md
+
+advanced-texture:
+  type: dir
+  name: 纹理
+  nodes:
+    - path: advanced/texture/cache
+      name: 纹理缓存
+      link: tiny/docs:tutorial/advanced/texture/cache.md
+    - path: advanced/texture/create
+      name: 创建纹理
+      link: tiny/docs:tutorial/advanced/texture/create.md
+
+advanced-displays:
+  type: dir
+  name: 显示对象
+  nodes:
+    - path: advanced/displays/intro
+      name: 基本概念
+      link: tiny/docs:tutorial/advanced/displays/intro.md
+    - path: advanced/displays/container
+      name: 容器
+      link: tiny/docs:tutorial/advanced/displays/container.md
+    - path: advanced/displays/sprite
+      name: 精灵
+      link: tiny/docs:tutorial/advanced/displays/sprite.md
+    - path: advanced/displays/position
+      name: 位置
+      link: tiny/docs:tutorial/advanced/displays/position.md
+    - path: advanced/displays/size
+      name: 尺寸
+      link: tiny/docs:tutorial/advanced/displays/size.md
+    - path: advanced/displays/scale
+      name: 缩放
+      link: tiny/docs:tutorial/advanced/displays/scale.md
+    - path: advanced/displays/rotation
+      name: 旋转
+      link: tiny/docs:tutorial/advanced/displays/rotation.md
+    - path: advanced/displays/globallocal
+      name: 相对位置
+      link: tiny/docs:tutorial/advanced/displays/globallocal.md
+    - path: advanced/displays/addremove
+      name: 添加或移除
+      link: tiny/docs:tutorial/advanced/displays/addremove.md
+
+advanced-graphics:
+  type: dir
+  name: 图形
+  nodes:
+    - path: advanced/graphics/intro
+      name: 简介
+      link: tiny/docs:tutorial/advanced/graphics/intro.md
+    - path: advanced/graphics/rect
+      name: 矩形
+      link: tiny/docs:tutorial/advanced/graphics/rect.md
+    - path: advanced/graphics/circle
+      name: 圆
+      link: tiny/docs:tutorial/advanced/graphics/circle.md
+    - path: advanced/graphics/ellipse
+      name: 椭圆
+      link: tiny/docs:tutorial/advanced/graphics/ellipse.md
+    - path: advanced/graphics/roundedrect
+      name: 圆角矩形
+      link: tiny/docs:tutorial/advanced/graphics/roundedrect.md
+    - path: advanced/graphics/line
+      name: 直线
+      link: tiny/docs:tutorial/advanced/graphics/line.md
+    - path: advanced/graphics/polygon
+      name: 多边形
+      link: tiny/docs:tutorial/advanced/graphics/polygon.md
+    - path: advanced/graphics/mask
+      name: 遮罩
+      link: tiny/docs:tutorial/advanced/graphics/mask.md
+
+advanced-text:
+  type: dir
+  name: 文字
+  nodes:
+    - path: advanced/text/basic
+      name: 简单使用
+      link: tiny/docs:tutorial/advanced/text/basic.md
+    - path: advanced/text/style
+      name: 样式
+      link: tiny/docs:tutorial/advanced/text/style.md
+
+advanced-transition:
+  type: dir
+  name: 转场
+  nodes:
+    - path: advanced/transition/stage
+      name: 舞台
+      link: tiny/docs:tutorial/advanced/transition/stage.md
+    - path: advanced/transition/scene
+      name: 场景
+      link: tiny/docs:tutorial/advanced/transition/scene.md
+    - path: advanced/transition/animation
+      name: 转场动画
+      link: tiny/docs:tutorial/advanced/transition/animation.md
+
+advanced-animatedsprite:
+  name: 帧动画
+  link: tiny/docs:tutorial/advanced/animatedsprite/animatedsprite.md
+
+advanced-actions:
+  type: dir
+  name: 动作
+  nodes:
+    - path: advanced/actions/basic
+      name: 简单使用
+      link: tiny/docs:tutorial/advanced/actions/basic.md
+    - path: advanced/actions/repeat
+      name: 重复
+      link: tiny/docs:tutorial/advanced/actions/repeat.md
+    - path: advanced/actions/delay
+      name: 延迟
+      link: tiny/docs:tutorial/advanced/actions/delay.md
+    - path: advanced/actions/easing
+      name: 设置缓冲
+      link: tiny/docs:tutorial/advanced/actions/easing.md
+    - path: advanced/actions/interpolation
+      name: 使用插值
+      link: tiny/docs:tutorial/advanced/actions/interpolation.md
+    - path: advanced/actions/callback
+      name: 回调
+      link: tiny/docs:tutorial/advanced/actions/callback.md
+    - path: advanced/actions/extras
+      name: 扩展篇
+      link: tiny/docs:tutorial/advanced/actions/extras.md
+
+advanced-ticker:
+  type: dir
+  name: Ticker
+  nodes:
+    - path: advanced/ticker/basic
+      name: 简单使用
+      link: tiny/docs:tutorial/advanced/ticker/basic.md
+    - path: advanced/ticker/countdown
+      name: 定时器
+      link: tiny/docs:tutorial/advanced/ticker/countdown.md
+
+advanced-events:
+  type: dir
+  name: 事件机制
+  nodes:
+    - path: advanced/events/addremove
+      name: 添加和移除
+      link: tiny/docs:tutorial/advanced/events/addremove.md
+    - path: advanced/events/list
+      name: 事件列表
+      link: tiny/docs:tutorial/advanced/events/list.md
+    - path: advanced/events/ee
+      name: EventEmitter
+      link: tiny/docs:tutorial/advanced/events/ee.md
+
+advanced-loader:
+  name: 加载器
+  link: tiny/docs:tutorial/advanced/loader/loader.md
+
+advanced-decide:
+  name: 碰撞检测
+  link: tiny/docs:tutorial/advanced/decide/decide.md
+
+advanced-utils:
+  type: dir
+  name: 公共方法
+  nodes:
+    - path: advanced/utils/utils
+      name: 公共方法
+      link: tiny/docs:tutorial/advanced/utils/utils.md
+    - path: advanced/utils/ismobile
+      name: isMobile
+      link: tiny/docs:tutorial/advanced/utils/ismobile.md
+    - path: advanced/utils/objectassign
+      name: object-assign
+      link: tiny/docs:tutorial/advanced/utils/objectassign.md
+
+advanced-screen:
+  name: 屏幕适配
+  link: tiny/docs:tutorial/advanced/screen/adaptation.md
+
+extras:
+  type: dir
+  name: 扩展
+  nodes:
+    - path: extras/particlecontainer
+      name: ParticleContainer
+      link: tiny/docs:tutorial/extras/particlecontainer.md
+    - path: extras/tilingsprite
+      name: TilingSprite
+      link: tiny/docs:tutorial/extras/tilingsprite.md
+    - path: extras/bitmaptext
+      name: 位图文字
+      link: tiny/docs:tutorial/extras/bitmaptext.md
+    - path: extras/extract
+      name: 画布扩展
+      link: tiny/docs:tutorial/extras/extract.md
+    - path: extras/dust
+      name: 简单粒子
+      link: tiny/docs:tutorial/extras/dust.md
+    - path: extras/media
+      name: 多媒体
+      link: tiny/docs:tutorial/extras/media.md
+    - path: extras/keyboard
+      name: 键盘
+      link: tiny/docs:tutorial/extras/keyboard.md
+    - path: extras/scroller
+      name: 滚动
+      link: tiny/docs:tutorial/extras/scroller.md
+
+resources:
+  name: 资源下载
+  link: tiny/docs:tutorial/resources.md

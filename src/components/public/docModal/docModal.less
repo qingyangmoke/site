@@ -1,0 +1,38 @@
+.doc-modal{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #373737;
+  background-color: rgba(55, 55, 55, 0.5);
+  height: 100%;
+  z-index: 1000;
+  transition: all .3s ease-in-out;
+  overflow: hidden;
+}
+.doc-container{
+  position: fixed;
+  right: -960px;
+  top: 0;
+  bottom: 0;
+  z-index: 1049;
+  box-shadow: 0 1px 3px #ddd, inset 0 0 3px #fff;
+  border-left: 1px solid #ddd;
+  overflow: hidden;
+  overflow-y: auto;
+  min-width: 960px;
+  background: #fff;
+  transition: right .3s ease-in-out;
+  overflow: hidden;
+  &-close{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    background-image: url(https://gw.alipayobjects.com/zos/rmsportal/SeZHzXzdDctDxqClKOSj.png);
+    background-size: cover;
+  }
+}

@@ -1,0 +1,33 @@
+@import "../../common/css/mixins";
+
+#plugins-page {
+  .site-content {
+    padding: 0 100px;
+  }
+
+  .ant-layout {
+    background-color: inherit;
+  }
+
+  .p-action-list {
+    margin-top: 20px;
+    font-size: 14px;
+
+    .p-doc-link {
+      float: right;
+      padding: 5px 25px;
+    }
+  }
+}
+
+// medium screen
+@media screen and (max-width: 1024px) {
+  #plugins-page {
+    .site-content {
+      padding: 0 10px;
+    }
+    .p-action-list {
+      display: none;
+    }
+  }
+}

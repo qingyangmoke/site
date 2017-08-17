@@ -1,0 +1,286 @@
+playgound:
+  name: Playground
+  desc: 简单的尝试一下
+  url: playground/index.html?js=./codes/Playground.js
+
+actions:
+  type: dir
+  name: 动作
+  children:
+    moveto:
+      name: 移动
+      url: playground/index.html?js=./codes/actions/MoveToTest.js
+      desc: MoveTo
+    moveby:
+      name: 移动
+      url: playground/index.html?js=./codes/actions/MoveByTest.js
+      desc: MoveBy
+    scaleto:
+      name: 缩放
+      url: playground/index.html?js=./codes/actions/ScaleToTest.js
+      desc: ScaleTo
+    scaleby:
+      name: 缩放
+      url: playground/index.html?js=./codes/actions/ScaleByTest.js
+      desc: ScaleBy
+    rotateto:
+      name: 旋转
+      url: playground/index.html?js=./codes/actions/RotateToTest.js
+      desc: RotateTo
+    rotateby:
+      name: 旋转
+      url: playground/index.html?js=./codes/actions/RotateByTest.js
+      desc: RotateBy
+    jumpto:
+      name: 跳跃
+      url: playground/index.html?js=./codes/actions/JumpToTest.js
+      desc: JumpTo
+    tinto:
+      name: 着色
+      url: playground/index.html?js=./codes/actions/TintToTest.js
+      desc: TintTo
+    tintby:
+      name: 着色
+      url: playground/index.html?js=./codes/actions/TintByTest.js
+      desc: TintBy
+    back:
+      name: 返回
+      url: playground/index.html?js=./codes/actions/BackTest.js
+      desc: Back
+    blink:
+      name: 闪烁
+      url: playground/index.html?js=./codes/actions/BlinkTest.js
+      desc: Blink
+    fadein:
+      name: 淡入
+      url: playground/index.html?js=./codes/actions/FadeInTest.js
+      desc: FadeIn
+    fadeout:
+      name: 淡出
+      url: playground/index.html?js=./codes/actions/FadeOutTest.js
+      desc: FadeOut
+    fadeto:
+      name: 渐进到
+      url: playground/index.html?js=./codes/actions/FadeToTest.js
+      desc: FadeTo
+    fadeinfadeout:
+      name: 淡入淡出
+      url: playground/index.html?js=./codes/actions/FadeInFadeOutTest.js
+      desc: FadeIn and FadeOut
+    onupdate:
+      name: 状态变化的监听
+      url: playground/index.html?js=./codes/actions/onUpdateTest.js
+      desc: onUpdate
+    oncomplete:
+      name: 动画结束的回调
+      url: playground/index.html?js=./codes/actions/onCompleteTest.js
+      desc: onComplete
+    sequence:
+      name: 顺序执行
+      url: playground/index.html?js=./codes/actions/sequenceTest.js
+      desc: sequence
+    spawn:
+      name: 批量同时执行
+      url: playground/index.html?js=./codes/actions/spawnTest.js
+      desc: spawn
+    pauseresume:
+      name: 暂停和继续
+      url: playground/index.html?js=./codes/actions/pauseResumeTest.js
+      desc: pause and resume
+    clone:
+      name: 克隆
+      url: playground/index.html?js=./codes/actions/cloneTest.js
+      desc: clone
+    delay:
+      name: 延迟执行
+      url: playground/index.html?js=./codes/actions/delayTest.js
+      desc: delay
+    easing:
+      name: 动画缓冲
+      url: playground/index.html?js=./codes/actions/EasingTest.js
+      desc: setEasing
+    interpolation:
+      name: 插值
+      url: playground/index.html?js=./codes/actions/InterpolationTest.js
+      desc: setInterpolation
+    repeat:
+      name: 重复
+      url: playground/index.html?js=./codes/actions/RepeatTest.js
+      desc: Repeat
+    repeatforever:
+      name: 无限重复
+      url: playground/index.html?js=./codes/actions/RepeatForeverTest.js
+      desc: RepeatForever
+    repeatback:
+      name: 重复和返回
+      url: playground/index.html?js=./codes/actions/RepeatBackTest.js
+      desc: Repeat & Back
+    repeatclone:
+      name: 重复和克隆
+      url: playground/index.html?js=./codes/actions/RepeatCloneTest.js
+      desc: Repeat & Clone
+    repeatdelay:
+      name: 重复和延迟
+      url: playground/index.html?js=./codes/actions/RepeatDelayTest.js
+      desc: Repeat & Delay
+    repeatoncomplete:
+      name: 重复和结束
+      url: playground/index.html?js=./codes/actions/RepeatOnCompleteTest.js
+      desc: Repeat & onComplete
+
+application:
+  type: dir
+  name: Application
+  children:
+    rendererlisten:
+      name: 渲染的监听
+      url: playground/index.html?js=./codes/application/rendererListenTest.js
+
+animatedsprite:
+  type: dir
+  name: 帧动画
+  children:
+    playstop:
+      name: 播放暂停
+      url: playground/index.html?js=./codes/animatedsprite/playStopTest.js
+      desc: playStop
+    reverse:
+      name: 反转
+      url: playground/index.html?js=./codes/animatedsprite/reverseTest.js
+      desc: reverse
+    onframechange:
+      name: 监听帧变化
+      url: playground/index.html?js=./codes/animatedsprite/onFrameChangeTest.js
+      desc: onFrameChange
+
+audios:
+  type: dir
+  name: 音频
+  children:
+    simple:
+      name: 简单使用
+      url: playground/index.html?js=./codes/audios/simpleTest.js
+
+dusts:
+  type: dir
+  name: 简单粒子
+  children:
+    simple:
+      name: 简单使用
+      url: playground/index.html?js=./codes/dusts/DustTest.js
+
+events:
+  type: dir
+  name: 事件
+  children:
+    dragging:
+      name: 拖拽
+      url: playground/index.html?js=./codes/events/draggingTest.js
+      desc: dragging
+    addremove:
+      name: 添加和移除
+      url: playground/index.html?js=./codes/events/addRemoveTest.js
+      desc: Add and remove events
+
+graphics:
+  type: dir
+  name: 图形
+  children:
+    basic:
+      name: 基础使用
+      url: playground/index.html?js=./codes/graphics/basicTest.js
+    animate:
+      name: 运动的图形
+      url: playground/index.html?js=./codes/graphics/animateTest.js
+
+loaders:
+  type: dir
+  name: 加载器
+  children:
+    basic:
+      name: 基础使用
+      url: playground/index.html?js=./codes/loaders/basicTest.js
+    binary:
+      name: 二进制数据文件加载
+      url: playground/index.html?js=./codes/loaders/BinaryLoaderTest.js
+
+texts:
+  type: dir
+  name: 文字
+  children:
+    basic:
+      name: 基础使用
+      url: playground/index.html?js=./codes/texts/basicTest.js
+    bitmaptext:
+      name: 位图文字
+      url: playground/index.html?js=./codes/texts/BitmapTextTest.js
+    rich:
+      name: 富文字
+      url: playground/index.html?js=./codes/texts/richTest.js
+
+ticker:
+  type: dir
+  name: Ticker
+  children:
+    basic:
+      name: 基础使用
+      url: playground/index.html?js=./codes/ticker/basicTest.js
+    binary:
+      name: 定时器
+      url: playground/index.html?js=./codes/ticker/countDownTest.js
+
+scroller:
+  type: dir
+  name: 滚动
+  children:
+    simple:
+      name: 基础使用
+      url: playground/index.html?js=./codes/scroller/basicTest.js
+    horizontal:
+      name: 水平方向
+      url: playground/index.html?js=./codes/scroller/horizontalTest.js
+
+videos:
+  type: dir
+  name: 视频
+  children:
+    simple:
+      name: 简单使用
+      url: playground/index.html?js=./codes/videos/simpleTest.js
+
+tiling:
+  type: dir
+  name: 瓷砖
+  children:
+    basic:
+      name: 基础使用
+      url: playground/index.html?js=./codes/tiling/basicTest.js
+    update:
+      name: 形态更新
+      url: playground/index.html?js=./codes/tiling/updateTest.js
+
+mask:
+  type: dir
+  name: 遮罩
+  children:
+    basic:
+      name: 基础使用
+      url: playground/index.html?js=./codes/mask/basicTest.js
+    imageshape:
+      name: 位图形状
+      url: playground/index.html?js=./codes/mask/imageShapeTest.js
+
+others:
+  type: dir
+  name: 其他
+  children:
+    performance:
+      name: 性能测试
+      url: playground/index.html?js=./codes/others/performanceTest.js
+    transition:
+      name: 场景切换
+      url: playground/index.html?js=./codes/others/TransitionTest.js
+    xhr:
+      name: XMLHttpRequest请求
+      url: playground/index.html?js=./codes/others/XHRTest.js
+

@@ -1,0 +1,19 @@
+# _default:
+#   type: dir/node
+#   source: gitlab/link/local
+#   name
+#   icon
+#   link
+#   desc
+
+_default:
+  type: node
+  source: github
+
+tinyjs-cli:
+  name: 本地开发工具
+  link: ant-tinyjs/tinyjs-cli:README.md
+
+tinyjs-resource-loader:
+  name: 游戏资源 webpack loader
+  link: ant-tinyjs/tinyjs-resource-loader:README.md

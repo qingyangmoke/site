@@ -1,0 +1,18 @@
+# _default:
+#   type: dir/node
+#   source: gitlab/link/local
+#   name
+#   icon
+#   link
+#   desc
+
+_default:
+  type: node
+  source: local
+
+api:
+  name: API
+  source: iframe
+  link: docs/
+  desc: API 文档
+

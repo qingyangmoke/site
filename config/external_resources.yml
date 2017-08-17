@@ -1,0 +1,27 @@
+git:
+  examples:
+    - https://github.com/yiiqii/flappybird.git
+    - https://github.com/yiiqii/airplane.git
+    - https://github.com/yiiqii/nohumanity.git
+    - https://github.com/yiiqii/running.git
+    - https://github.com/yiiqii/mole.git
+    - https://github.com/zoolsher/doodle-jump.git
+    - https://github.com/zoolsher/cuo-money.git
+    - https://github.com/Zz0819/snake.git
+  plugin:
+    - https://api.github.com/repos/ant-tinyjs/tinyjs-plugin-extract/tarball/master^tinyjs-plugin-extract
+    - https://api.github.com/repos/ant-tinyjs/tinyjs-plugin-dust/tarball/master^tinyjs-plugin-dust
+    - https://api.github.com/repos/ant-tinyjs/tinyjs-plugin-bitmap-text/tarball/master^tinyjs-plugin-bitmap-text
+    - https://api.github.com/repos/ant-tinyjs/tinyjs-plugin-audio/tarball/master^tinyjs-plugin-audio
+    - https://api.github.com/repos/ant-tinyjs/tinyjs-plugin-scroller/tarball/master^tinyjs-plugin-scroller
+    - https://api.github.com/repos/ant-tinyjs/tinyjs-plugin-layer/tarball/master^tinyjs-plugin-layer
+    - https://api.github.com/repos/ant-tinyjs/tinyjs-plugin-tiling/tarball/master^tinyjs-plugin-tiling
+    - https://api.github.com/repos/ant-tinyjs/tinyjs-plugin-particles/tarball/master^tinyjs-plugin-particles
+    - https://api.github.com/repos/ant-tinyjs/tinyjs-plugin-keyboard/tarball/master^tinyjs-plugin-keyboard
+    - https://api.github.com/repos/ant-tinyjs/tinyjs-plugin-mesh/tarball/master^tinyjs-plugin-mesh
+    - https://api.github.com/repos/ant-tinyjs/tinyjs-plugin-dragonbones/tarball/master^tinyjs-plugin-dragonbones
+    - https://api.github.com/repos/qingyangmoke/tinyjs-plugin-p2/tarball/master^tinyjs-plugin-p2
+    - https://api.github.com/repos/qingyangmoke/tinyjs-plugin-ant/tarball/master^tinyjs-plugin-ant
+    - https://api.github.com/repos/qingyangmoke/tinyjs-plugin-worldwrap/tarball/master^tinyjs-plugin-worldwrap
+    - https://api.github.com/repos/qingyangmoke/tinyjs-plugin-weapon/tarball/master^tinyjs-plugin-weapon
+    - https://api.github.com/repos/qingyangmoke/tinyjs-plugin-ninepatch/tarball/master^tinyjs-plugin-ninepatch

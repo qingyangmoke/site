@@ -1,0 +1,183 @@
+.component-card {
+  margin-bottom: 130px;
+  padding: 0 4px;
+  color: #515669;
+  z-index: 666;
+
+  .c-background-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-size: cover;
+    transition: all 500ms;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .c-background-img.active{
+    // transform: scale(1.1,1.1);
+    // filter: blur(10px);
+  }
+
+  .c-background-video{
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #2b3044;
+  }
+
+  .c-background-video video{
+    width:100%;
+    height:100%;
+  }
+
+  .c-content {
+    height: 280px;
+    background: #FBFBFB;
+    position: relative;
+    overflow: hidden;
+    border-radius: 13px;
+    box-shadow: #666666 0 0 6px 0;
+    transition: all 300ms;
+    transform-origin: top;
+    z-index: 666;
+  }
+
+  .c-content.show-desc{
+    transform: scale(0.8)
+  }
+
+  .c-detail {
+    position: absolute;
+    top: 30%;
+    // left: 50%;
+    // bottom: 46px;
+    width: 100%;
+    padding: 0 20px;
+    // transform: translateX(-50%) translateY(-50%);
+
+    .c-name {
+      font-size: 26px;
+      font-weight: 100;
+      color: black;
+      font-family: Verdana;
+    }
+    .c-des {
+      // margin-top: 20px;
+      font-size: 14px;
+      color: #A6A7AA;
+    }
+    .c-editor {
+      color: #A6A7AA;
+      margin-top: 15px;
+      font-size: 12px;
+    }
+
+  }
+}
+
+.c-info {
+  position: absolute;
+  bottom: 10px;
+  font-size: 11px;
+
+  > div {
+      display: inline-block;
+      margin-left: 10px;
+      color: #FFF;
+
+      span {
+        display: inherit;
+        padding: 1px 3px;
+      }
+  }
+
+  .logo {
+    background: #5C5C5C;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+  .info {
+    background: #82BA12;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+  }
+  .download-info .info {
+    background: #1CCC15;
+  }
+}
+
+.c-action-list {
+  position: absolute;
+  bottom: -46px;
+  left: 0;
+  right: 0;
+  // background: #F5F5F5;
+  transition: 0.3s;
+  &.show {
+    transform: translateY(-100%);
+  }
+
+  .ant-menu-item {
+    width: 25%;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    &:hover {
+      border: none;
+    }
+    a.disabled {
+      color: #ccc;
+      cursor: default;
+    }
+  }
+
+  .c-mobile-reference {
+    display: none;
+  }
+}
+
+.c-install-info {
+  padding: 10px;
+  font-size: 14px;
+  .c-instruction {
+    margin-bottom: 20px;
+  }
+  .code {
+    color: #C7254E;
+  }
+  strong {
+    font-weight: bold;
+  }
+}
+
+// medium screen
+@media screen and (max-width: 1024px) {
+  .c-action-list {
+    bottom: 0;
+    &.show {
+      transform: translateY(0);
+    }
+    .ant-menu-item {
+      padding: 0 10px;
+    }
+    .c-mobile-reference {
+      display: block;
+    }
+  }
+
+  .c-pc-reference {
+    display: none;
+  }
+}
+
+//

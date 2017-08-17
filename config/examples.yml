@@ -1,0 +1,84 @@
+# _default:
+#   type: dir/node
+#   source: gitlab/link/local
+#   name
+#   icon
+#   link
+#   desc
+#   width
+#   height
+#   direction: h/v
+
+_default:
+  type: node
+  source: iframe
+  width: 320
+  height: 568
+  direction: v
+
+mole:
+  name: 打地鼠
+  auther: yiiqii
+  link: examples/mole/
+  git: https://github.com/yiiqii/mole
+  desc: 打地鼠，赢红包
+  img: https://gw.alipayobjects.com/zos/rmsportal/zdBVHaWQGBMAmHjOnSqA.png@100h_100w_1e_1c
+
+snake:
+  name: Snake
+  auther: 遥清
+  link: examples/snake/
+  git: https://github.com/Zz0819/snake
+  desc: 简单好玩的贪吃蛇
+  img: https://gw.alipayobjects.com/zos/rmsportal/BnZrifUZhXPVPXDERXbW.png@100h_100w_1e_1c
+
+doodlejump:
+  name: Doodle jump
+  auther: zoolsher
+  link: examples/doodle-jump/
+  git: https://github.com/zoolsher/doodle-jump
+  desc: 看看你能跳多高
+  img: https://gw.alipayobjects.com/zos/rmsportal/lhlmHxPuDymktobErGsp.png@100h_100w_1e_1c
+
+nohumanity:
+  name: Nohumanity
+  auther: yiiqii
+  link: examples/nohumanity/
+  git: https://github.com/yiiqii/nohumanity
+  desc: 假的吧？太难了！
+  img: https://gw.alipayobjects.com/zos/rmsportal/NTjzAxMzwbZRuehOrTkL.png@100h_100w_1e_1c
+
+running:
+  name: Running
+  auther: yiiqii
+  link: examples/running/
+  git: https://github.com/yiiqii/running
+  desc: Pixi.js 经典例子，用 Tiny.js 重写
+  direction: h
+  img: https://gw.alipayobjects.com/zos/rmsportal/vLCFvqzTfEOBjsxjcBuY.png@100h_100w_1e_1c
+
+flappybird:
+  name: Flappybird
+  auther: yiiqii
+  link: examples/flappybird/
+  git: https://github.com/yiiqii/flappybird
+  desc: 就是那只鸟，用 Tiny.js 重写
+  img: https://gw.alipayobjects.com/zos/rmsportal/LVCbnhIkTdciePvdJfPI.png@100h_100w_1e_1c
+
+airplane:
+  name: 打飞机
+  auther: yiiqii
+  link: examples/airplane/
+  git: https://github.com/yiiqii/airplane
+  desc: 用 Tiny.js 实现的打飞机小游戏
+  img: https://gw.alipayobjects.com/zos/rmsportal/nnDVHsvUROMhUEzPQPxd.png@100h_100w_1e_1c
+
+cuomoney:
+  name: Cuo money
+  auther: zoolsher
+  link: examples/cuo-money/
+  git: https://github.com/zoolsher/cuo-money
+  desc: 你就是是手速最快的那个人么？快来证明你自己！
+  img: https://gw.alipayobjects.com/zos/rmsportal/PvMsazMRtiENzMSuMHYc.png@100h_100w_1e_1c
+
+

@@ -1,0 +1,200 @@
+@import "../../common/css/mixins";
+
+#examples-page {
+  .p-content {
+    overflow: hidden;
+    min-height: 700px;
+    height: 804px;
+    padding-top: 30px;
+
+    &.phone {
+      .background-position(center, 0px);
+      background-size: 380px 804px;
+      background-image: url('https://zos.alipayobjects.com/rmsportal/oiYmPuvQBrHbxUfWmdYn.png');
+
+      &.h {
+        .background-position(center, 81px);
+        background-size: 804px 380px;
+        background-image: url('https://zos.alipayobjects.com/rmsportal/PHPlfDCEouBNroMmcIEV.png');
+      }
+    }
+  }
+  .frame {
+    margin: 0 auto;
+    .transform(translateX(3px) translateY(84px));
+    overflow: hidden;
+
+    & > div {
+      height: 100%;
+    }
+  }
+
+  .frame-window {
+    height: 100%;
+    border: none;
+    width: 100%;
+  }
+
+  .qrcode-container {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+
+    .source-link-btn {
+      text-align: center;
+      display: block;
+      font-size: 16px;
+      padding: 10px 0;
+    }
+  }
+
+  .list-sider {
+    overflow: hidden;
+    height: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    width: 300px;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .page-layout {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+
+  @space: 5px;
+
+  .mobile-list {
+    overflow: auto;
+    padding-left: @space;
+    padding-right: 5px;
+    padding-top: 3px;
+  }
+
+  .ant-layout-sider {
+    top: 0;
+    position: relative;
+  }
+
+  .ant-layout-sider-children {
+    height: 100%;
+  }
+
+  .trans-container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    .trans-left {
+      height: 100%;
+      min-height: 100%;
+      width: 100%;
+      overflow: auto;
+      transition: all 0.5s;
+    }
+    .trans-right {
+      height: 100%;
+      flex: 1 1;
+      transition: all 0.3s;
+      overflow: auto;
+      min-height: 100%;
+      background: white;
+    }
+    .hide-left {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    .show-right {
+      transform: translate3d(-100%, 0, 0);
+      margin-left: -10px;
+    }
+  }
+}
+
+@media screen and (max-height: 640px) and (max-width: 750px) {
+  #examples-page {
+    .p-content {
+      &.phone {
+        .background-position(center, -95px);
+      }
+    }
+    .frame {
+      .transform(translateX(0) translateY(13px));
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  #examples-page {
+    .p-content {
+      &.phone {
+        .background-position(center, -80px);
+      }
+    }
+    .frame {
+      .transform(translateX(0) translateY(28px));
+    }
+    .list-sider {
+      width: 100%;
+    }
+
+    .frame-container {
+      display: none;
+    }
+  }
+}
+
+// mobile screen
+@media screen and (max-width: 320px) {
+  #examples-page {
+    .ant-layout-sider {
+      z-index: 7;
+    }
+    .frame {
+      position: absolute;
+      z-index: 5;
+      .transform(translateX(0) translateY(-50px));
+    }
+    .p-float-menu-button {
+      z-index: 6;
+    }
+    .list-sider {
+      width: 100%;
+    }
+
+    .frame-container {
+      display: none;
+    }
+  }
+}
+
+@media screen and (orientation: landscape) and (max-width: 750px) {
+  #examples-page {
+    .ant-layout-sider {
+      z-index: 7;
+    }
+    .p-content {
+      &.phone {
+        &.h {
+          background-image: inherit;
+
+          .frame {
+            position: absolute;
+            z-index: 5;
+            .transform(translateX(0) translateY(-50px));
+          }
+        }
+      }
+    }
+    .p-float-menu-button {
+      z-index: 6;
+    }
+  }
+}
+
+

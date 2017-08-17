@@ -1,0 +1,78 @@
+#home-page {
+  font-weight: 100;
+
+  .site-slider {
+    height: 700px;
+    background-color: rgba(0, 0, 0, 0.7);
+    background-size: cover;
+    background-image: url(https://zos.alipayobjects.com/rmsportal/khzFUkgZswuhqTwmaRSb.jpg);
+    background-position: center center;;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      content: " ";
+      height: 100%;
+      width: 100%;
+      background-color: rgba(150, 108, 67, 0.3);
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      width: 80%;
+      color: #FFF;
+      text-align: center;
+
+      .content-l1 {
+        font-size: 48px;
+      }
+
+      .ant-btn {
+        width: 236px;
+        height: 62px;
+        font-size: 25px;
+        color: #4a3a31;
+        margin: 69px 5px 0px 5px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: none;
+
+        &.small {
+          width: 113px;
+          height: 40px;
+          font-size: 16px;
+          margin-top: 10px;
+          background-color: rgba(255, 255, 255, 0);
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0);
+          }
+        }
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 1);
+        }
+      }
+    }
+  }
+}
+
+// mobile screen
+@media screen and (max-width: 1024px) {
+  #home-page {
+    .site-slider {
+      height: 350px;
+
+      .content {
+        .content-l1 {
+          font-size: 30px;
+        }
+        .ant-btn {
+          display: none;
+        }
+      }
+    }
+  }
+}

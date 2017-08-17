@@ -1,0 +1,15 @@
+# _default:
+#   type: dir/node
+#   source: gitlab/link/local
+#   name
+#   icon
+#   link
+#   desc
+
+_default:
+  type: node
+  source: local
+
+plugin-development:
+  name: 插件开发
+  link: plugin-development.md
