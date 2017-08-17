@@ -3,6 +3,17 @@ playgound:
   desc: 简单的尝试一下
   url: playground/index.html?js=./codes/Playground.js
 
+displays:
+  type: dir
+  name: 显示对象
+  children:
+    tileset:
+      name: 使用 tileset
+      url: playground/index.html?js=./codes/displays/tilesetTest.js
+    removeaction:
+      name: 移除后自动清除 actions
+      url: playground/index.html?js=./codes/displays/removeActionTest.js
+
 actions:
   type: dir
   name: 动作
@@ -144,6 +155,9 @@ animatedsprite:
       name: 播放暂停
       url: playground/index.html?js=./codes/animatedsprite/playStopTest.js
       desc: playStop
+    tileset:
+      name: 使用 tileset
+      url: playground/index.html?js=./codes/animatedsprite/tilesetTest.js
     reverse:
       name: 反转
       url: playground/index.html?js=./codes/animatedsprite/reverseTest.js
@@ -217,6 +231,9 @@ texts:
     rich:
       name: 富文字
       url: playground/index.html?js=./codes/texts/richTest.js
+    movetext:
+      name: 文字的动作
+      url: playground/index.html?js=./codes/texts/moveTextTest.js
 
 ticker:
   type: dir
@@ -247,6 +264,17 @@ videos:
     simple:
       name: 简单使用
       url: playground/index.html?js=./codes/videos/simpleTest.js
+
+particles:
+  type: dir
+  name: ParticleContainer
+  children:
+    basic:
+      name: 基础使用
+      url: playground/index.html?js=./codes/particles/basicTest.js
+    getbounds:
+      name: 获取容器的 Bound
+      url: playground/index.html?js=./codes/particles/getBoundsTest.js
 
 tiling:
   type: dir
