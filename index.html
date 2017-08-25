@@ -30,7 +30,7 @@
 <script>
   if (window.location.hostname !== 'tinyjs.alibaba.net' && !location.port) {
     $.getScript('http://tinyjs.alibaba.net/libs/tiny.debug.js', function () {
-      window.location.replace('http://tinyjs.alibaba.net');
+      window.location.replace(window.location.href.replace('tinyjs.net', 'tinyjs.alibaba.net'));
     });
   }
 </script>
