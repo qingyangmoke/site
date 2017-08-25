@@ -1,0 +1,13 @@
+<h1 id="场景切换">场景切换</h1>
+<p>如前所述，使用 <code>Application</code> 的实例化对象 app 的 <code>replaceScene</code> 方法来切换场景：</p>
+<pre><code class=" js language- js">// 以 MoveInL 方式切换到场景 sceneName
+app.replaceScene(sceneName, 'MoveInL');</code></pre>
+<p>app 的 <code>replaceScene</code> 方法接受 &gt;= 3 个参数：</p>
+<pre><code>replaceScene(scene[DisplayObject], transition[String], duration[Number], ..);</code></pre>
+<p>其中第4个参数是按需传入的，比如 <code>FadeColor</code> 需要传入16进制颜色值：</p>
+<pre><code class=" js language- js">app.replaceScene(sceneName, 'FadeColor', 500, 0xFF0000);</code></pre>
+<p>你也可以直接通过 <code>Transition</code> 转场类操作两个显示实例之间的转场：</p>
+<pre><code class=" js language- js">var trans = new Tiny.Transition(scene1, scene2, duration);
+trans['FadeColor'](0xFF0000);</code></pre>
+<hr />
+<p>更多切换动画请转到“转场”篇。</p>

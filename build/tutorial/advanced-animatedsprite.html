@@ -1,0 +1,69 @@
+<h1 id="帧动画">帧动画</h1>
+<p>逐帧播放动画应该使用的很广泛，在 Tiny.js 里，可以使用 <code>Tiny.AnimatedSprite</code> 类来创建帧动画。</p>
+<p>假设我们有四个序列帧，如下：</p>
+<p><img src="https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/hao/hao0.png" width=160 /><img src="https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/hao/hao1.png" width=160 /><img src="https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/hao/hao2.png" width=160 /><img src="https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/hao/hao3.png" width=160 /></p>
+<pre><code class=" js language- js">// 声明一个数组，用于存放序列帧图的纹理
+var textures = [];
+for (var i = 0; i &lt; 4; i++) {
+  // 将帧图挨个添加到纹理数组中
+  textures.push(Tiny.Texture.fromImage('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/hao/hao' + i + '.png'));
+}
+
+// 这个纹理数组就是类初始化的入参
+var mc = new Tiny.AnimatedSprite(textures);
+// 设置动画速度，值越大速度越快
+mc.animationSpeed = 0.08;
+// 立即播放
+mc.play();</code></pre>
+<p>上面代码的预览效果如下：</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/OvVLVoCZUQJzGgVnFQat.gif" width=160 /></p>
+<h2 id="静态创建">静态创建</h2>
+<p>前面介绍了通过 <code>Tiny.AnimatedSprite</code> 类来创建帧动画，也可以通过它的静态方法 <code>fromImages</code> 来创建：</p>
+<pre><code class=" js language- js">var images = [];
+for (var i = 0; i &lt; 4; i++) {
+  // 将帧图挨个添加到图片数组中
+  images.push('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/hao/hao' + i + '.png');
+}
+var mc = Tiny.AnimatedSprite.fromImages(images);</code></pre>
+<p>另外，也可以通过 frame 来创建：</p>
+<pre><code class=" js language- js">// 创建一个加载器
+var loader = new Tiny.loaders.Loader();
+loader
+    // 添加 tileset 文件
+  .add('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/tiles/mole_tile.json')
+    // 加载完成回调
+  .load(function () {
+    // 将 tileset 文件中定义的 frame 名放到数组 frames 中
+    var frames = ['ali_mole.png', 'ali_mole_hit.png'];
+    // 调用 Tiny.AnimatedSprite 的静态方法 fromImages 来创建帧动画，入参就是上面的 frames 数组
+    var mc = Tiny.AnimatedSprite.fromImages(frames);
+  });</code></pre>
+<h2 id="播放暂停">播放&amp;暂停</h2>
+<p>调用 <code>Tiny.AnimatedSprite</code> 实例化对象的 <code>play</code> 方法，就会立即播放帧动画，也可以使用 <code>gotoAndPlay</code> 方法从某帧开始播放：</p>
+<pre><code class=" js language- js">mc.play();</code></pre>
+<pre><code class=" js language- js">// 从第 0 帧开始播放
+mc.gotoAndPlay(0);</code></pre>
+<p>暂停就是 <code>stop</code> 方法，也可以使用 <code>gotoAndStop</code> 方法直接暂停到某帧：</p>
+<pre><code class=" js language- js">mc.stop();</code></pre>
+<pre><code class=" js language- js">// 直接到达第三帧，并暂停
+mc.gotoAndStop(3);</code></pre>
+<h2 id="速度控制">速度控制</h2>
+<p>设置实例化对象的属性 <code>animationSpeed</code> 可以控制动画的速度：</p>
+<pre><code class=" js language- js">// 动画的速度是，值越大速度越快，这里的 1/60 相当于每秒一帧
+mc.animationSpeed = 1 / 60;</code></pre>
+<pre><code class=" js language- js">// 这里的 1 相当于每秒 60 帧
+mc.animationSpeed = 1;</code></pre>
+<h2 id="反转">反转</h2>
+<p>调用实例化对象的 <code>reverse</code> 方法就可以反转播放动画：</p>
+<pre><code class=" js language- js">mc.reverse();</code></pre>
+<h2 id="当前帧">当前帧</h2>
+<p>调用实例化对象的 <code>currentFrame</code> 属性，就可以获取当前播放的帧：</p>
+<pre><code class=" js language- js">console.log(mc.currentFrame);
+//=&gt; 7</code></pre>
+<h2 id="监听帧变化">监听帧变化</h2>
+<p>设置实例化对象的 <code>onFrameChange</code> 方法可以监听帧变化：</p>
+<pre><code class=" js language- js">mc.onFrameChange = function () {
+  console.log(new Date()).toLocaleTimeString());
+};
+//=&gt; ..
+//=&gt; 下午8:32:12</code></pre>

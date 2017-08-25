@@ -1,0 +1,120 @@
+<h1 id="遮罩">遮罩</h1>
+<p>遮罩的场景很广泛，合理的使用可以完成很多不同的效果，我们先看看一个简单的例子：</p>
+<pre><code class=" js language- js">// 创建一个容器
+var container = new Tiny.Container();
+// 创建一个精灵
+var sprite = Tiny.Sprite.fromImage('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/logo.png');
+// 创建一个圆
+var g = new Tiny.Graphics();
+g.lineStyle(0);
+g.beginFill(0xFFFFFF);
+// x: 60, y: 150, 直径：60
+g.drawCircle(60, 150, 60);
+g.endFill();
+// 设置精灵的遮罩是这个圆形
+sprite.mask = g;
+// 将精灵添加到容器 container 中
+container.addChild(sprite);
+// 切换场景为这个 container
+app.replaceScene(container);</code></pre>
+<p>效果如下：</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/MhbEXlZtyBScDzlAtHtd.png" alt="" /></p>
+<h2 id="使用位图">使用位图</h2>
+<p>说到位图，我们可能会追溯到<strong>像素阵列</strong>，特殊时候，用透明背景的图片可以快速达到某种形态的效果，比如下图：</p>
+<p><img src="https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/mokey.png" width=200 /></p>
+<p>然后我们想要用这个透明 png 图片来做遮罩，应该如何做？</p>
+<p>1、首先，将位图转化为像素值（注意：这里会用到插件 <code>tinyjs-plugin-extract</code>）：</p>
+<pre><code class=" js language- js">// 使用静态方法 fromImage 创建纹理
+var texture = Tiny.Texture.fromImage('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/mokey.png');
+// 使用纹理创建精灵
+var mokey = new Tiny.Sprite(texture);
+// 只有等图片加载完成才能获取到像素值
+texture.on('update', function () {
+  // 使用插件 tinyjs-plugin-extract 的方法 pixels 将精灵转换成像素值
+  var pixels = app.renderer.plugins.extract.pixels(mokey);
+  console.log(pixels);
+  //=&gt; Uint8Array(1166400) [0, 0, 0, 0, 0, 0, 0, 0, ...]
+});</code></pre>
+<p>2、然后我们解析一下这个 pixels，这是一个 <code>Uint8Array</code> 的数组，排列的规则是自左向右、自上而下对应到位图上的像素点，每四个一组（RGBA值），理解之后再分解一下：</p>
+<pre><code class=" js language- js">var arr = [];
+for (var i = 0; i &lt; pixels.length; i++) {
+  if (i % 4 === 0) {
+    var rgba = [];
+    for (var c = 0; c &lt; 4; c++) {
+      rgba.push(pixels[i + c]);
+    }
+    arr.push(rgba);
+  }
+}
+console.log(arr);
+//=&gt; (291600) [Array(4), Array(4), Array(4), ...]</code></pre>
+<p>这样，我们就拿到位图的像素矩阵，因为是 png 的透明图，所以我们找“形状”就直接判断 <code>A</code> 值（即 <code>alpha</code> 通道）是否为 0 即可（当然，如果是边缘模糊，也可以以中间值来判断）。</p>
+<pre><code class=" js language- js">var pos = [];
+for (var j = 0; j &lt; arr.length; j++) {
+  if (arr[j][3] !== 0) {
+    pos.push([j % width, ~~(j / height)]);
+  }
+}
+console.log(pos);
+//=&gt; (98640) [Array(2), Array(2), Array(2), ...]</code></pre>
+<p>这样，我们就拿到了有像素值的坐标了，以这些坐标用 <code>Graphics</code> 的直线画图形就成“形状”了：</p>
+<pre><code class=" js language- js">var g = new Tiny.Graphics();
+g.lineStyle(1, 0x000000, 1);
+pos.forEach((p) =&gt; {
+  g.moveTo(p[0], p[1]);
+  g.lineTo(p[0] + 1, p[1] + 1);
+});</code></pre>
+<p>结果如下：</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/FyDiqABssXKEcPTlBFFH.png" alt="" /></p>
+<p>3、最后创建一个背景，并将它的遮罩设置成转化后的图形：</p>
+<pre><code class=" js language- js">var sprite = Tiny.Sprite.fromImage('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/bg/pic1.jpg');
+// 转化的方法 pixels2graphics 见篇尾
+sprite.mask = pixels2graphics(pixels, mokey.width, mokey.height);</code></pre>
+<p>结果如下：</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/bTAnZfbHfzYFnSgdegwh.png" alt="" /></p>
+<blockquote>
+  <p>注意</p>
+  <ul>
+  <li>使用此方法做遮罩时，初始化 <code>Application</code> 的启动参数 <code>renderOptions.antialias</code> 需要设置为 <code>false</code>，要不然会有明显的透明值。</li>
+  <li>遮罩的位移（<code>setPosition</code>）请慎用浮点数，最好强制转化成整数。</li>
+  <li>请不要过于依赖此姿势，使用过多或影响性能，特殊时候适当使用。</li>
+  </ul>
+</blockquote>
+<hr />
+<p>附上像素转化代码：</p>
+<pre><code class=" js language- js">/**
+ * 像素转化为图形
+ *
+ * @param {Array}   pixels  - 位图像素值
+ * @param {Number}  width   - 位图真实宽度
+ * @param {Number}  height  - 位图真实高度
+ * @return {Tiny.Graphics}
+ */
+function pixels2graphics(pixels, width, height) {
+  var arr = [];
+  var pos = [];
+
+  for (var i = 0; i &lt; pixels.length; i++) {
+    if (i % 4 === 0) {
+      var rgba = [];
+      for (var c = 0; c &lt; 4; c++) {
+        rgba.push(pixels[i + c]);
+      }
+      arr.push(rgba);
+    }
+  }
+  for (var j = 0; j &lt; arr.length; j++) {
+    if (arr[j][3] !== 0) {
+      pos.push([j % width, ~~(j / height)]);
+    }
+  }
+
+  var g = new Tiny.Graphics();
+  g.lineStyle(1, 0x000000, 1);
+  pos.forEach((p) =&gt; {
+    g.moveTo(p[0], p[1]);
+    g.lineTo(p[0] + 1, p[1] + 1);
+  });
+
+  return g;
+}</code></pre>

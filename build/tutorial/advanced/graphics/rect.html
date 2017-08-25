@@ -1,0 +1,22 @@
+<h1 id="矩形">矩形</h1>
+<p>所有的图片创建都要通过 <code>Graphics</code> 类来实例化。</p>
+<pre><code class=" js language- js">var rectangle = new Tiny.Graphics();</code></pre>
+<p>使用 <code>beiginFill</code>，传入一个16进制的颜色值来设置矩形的填充色，下面我们设置它为天蓝色：</p>
+<pre><code class=" js language- js">rectangle.beginFill(0x66CCFF);</code></pre>
+<p>如果想要给图形加一个描边，使用 <code>lineStyle</code> 方法，下面我们添加一个4像素宽的红色边框，透明度是1：</p>
+<pre><code class=" js language- js">rectangle.lineStyle(4, 0xFF3300, 1);</code></pre>
+<p>使用 <code>drawRect</code> 方法来绘制矩形，它的参数分别是 <code>x</code>，<code>y</code>，<code>width</code> 和 <code>height</code>。</p>
+<pre><code class=" js language- js">rectangle.drawRect(x, y, width, height);</code></pre>
+<p>最后用 <code>endFill</code> 结束绘制：</p>
+<pre><code class=" js language- js">rectangle.endFill();</code></pre>
+<p>这就是 Canvas 原生的 API！下面是完整的代码片段，并且设置了位置：</p>
+<pre><code class=" js language- js">var rectangle = new Tiny.Graphics();
+rectangle.lineStyle(4, 0xFF3300, 1);
+rectangle.beginFill(0x66CCFF);
+rectangle.drawRect(0, 0, 64, 64);
+rectangle.endFill();
+rectangle.setPosition(170);</code></pre>
+<blockquote>
+  <p>注意</p>
+  <p>大量是使用 <code>Graphics</code> 会非常影响性能，所以，请慎用！能用图片代替的尽量用图片。</p>
+</blockquote>

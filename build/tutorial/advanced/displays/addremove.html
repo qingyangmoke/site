@@ -1,0 +1,58 @@
+<h1 id="添加或移除">添加或移除</h1>
+<p>在介绍 <code>Container</code> 时，已经了解到简单添加的姿势，或许这种简单的方式在有些场景下远远不够用，当然，你可以使用本篇介绍的更多的姿势。</p>
+<h2 id="添加到指定层">添加到指定层</h2>
+<p>是的，用 <code>addChildAt</code> 方法，它接受两个参数：</p>
+<pre><code class=" js language- js">addChildAt(child[DisplayObject], index[Number]);</code></pre>
+<pre><code class=" js language- js">// 先添加两个占位
+container.addChild(new Tiny.Text('111111'));
+container.addChild(new Tiny.Text('222222'));
+// 再把精灵添加到 1 位置（即第 2 层）
+container.addChildAt(Tiny.Sprite.fromImage('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/ants/lamp.png'), 1);
+console.log(container.children.length);
+//=&gt; 3</code></pre>
+<p>效果如下：</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/XCFeXeaqDRMssFDUqZGC.png" alt="" /></p>
+<p>可以看出，文本 <code>222222</code> 被“挤”到第 3 层了，就是说，从插入位置起，后面的层次都 +1。</p>
+<blockquote>
+  <p>注意</p>
+  <p><code>addChildAt</code> 的第二个参数不能超出子元素的总数，如果超出，会抛异常</p>
+</blockquote>
+<h2 id="移除">移除</h2>
+<p>那么，如何移除场景里的精灵？可以使用 <code>Container</code> 类的 <code>removeChild</code> 方法，它接受一个参数：</p>
+<pre><code class=" js language- js">removeChild(child[DisplayObject]);</code></pre>
+<pre><code class=" js language- js">container.removeChild(sprite);</code></pre>
+<p>但是，建议设置精灵的 <code>visible</code> 属性为 <code>false</code>，因为这样更简单，效率更高。</p>
+<pre><code class=" js language- js">sprite.setVisible(false);</code></pre>
+<h2 id="移除指定层">移除指定层</h2>
+<p>是的，用 <code>removeChildAt</code> 方法，它接受一个参数：</p>
+<pre><code class=" js language- js">removeChildAt(index[Number]);</code></pre>
+<pre><code class=" js language- js">// 先添加两个占位
+container.addChild(new Tiny.Text('111111'));
+container.addChild(new Tiny.Text('222222'));
+container.removeChildAt(1);
+console.log(container.children.length);
+//=&gt; 1</code></pre>
+<p>然后，文本 <code>222222</code> 就被移除掉了。</p>
+<h2 id="批量移除">批量移除</h2>
+<p>使用 <code>removeChildren</code> 可以批量移除多个连续相邻的显示对象，它接受两个参数：</p>
+<pre><code class=" js language- js">removeChildren(beginIndex[Number=0], endIndex[Number=null]);</code></pre>
+<p>也就是起始位置，假设某个容器有4个精灵，我们想移除中间两个：</p>
+<pre><code class=" js language- js">var container = new Tiny.Container();
+// 循环添加
+for (var i = 0; i &lt; 4; i++) {
+  container.addChild(Tiny.Sprite.fromImage('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/hao/hao' + i + '.png'));
+}
+console.log(container.children.length);
+//=&gt; 4
+// 移除2、3位
+container.removeChildren(1, 3);
+console.log(container.children.length);
+//=&gt; 2</code></pre>
+<h2 id="监听变化">监听变化</h2>
+<p>无论添加、交换还是移除精灵，都可以反馈出来，你可以通过监听 <code>onChildrenChange</code> 来做回调：</p>
+<pre><code class=" js language- js">// 在操作前添加监听回调
+container.onChildrenChange = function () {
+  console.log('有人动你娃啦');
+};
+container.removeChildren();
+//=&gt; 有人动你娃啦</code></pre>

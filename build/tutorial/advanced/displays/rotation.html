@@ -1,0 +1,34 @@
+<h1 id="旋转">旋转</h1>
+<p>你可以通过设置精灵的 <code>rotation</code> 属性来更改它们的旋转角度，属性的值是弧度值（<a href="http://www.mathsisfun.com/geometry/radians.html">了解更多？</a>）。<br />
+使用静态方法 <code>Tiny.deg2radian</code> 可以轻松将度数转为弧度。下面的代码将精灵以左上角为旋转点顺时针旋转 45 度。</p>
+<pre><code class=" js language- js">antSprite.setRotation(Tiny.deg2radian(45));</code></pre>
+<p><img src="https://zos.alipayobjects.com/rmsportal/MhqAtVNtFHdCVDlLacPh.jpg@320w" alt="" /></p>
+<p>那么，旋转点是怎么回事？</p>
+<p>从上面的操作可以看出，精灵的左上角代表它的 <code>x</code> 和 <code>y</code> 的位置，这个点就是旋转点。在你设置它的 <code>rotation</code> 属性时，它就以这个点进行旋转，看下面的图可以更直观的理解：</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/xOkynJOqYAErgTojBcnY.jpg@320w" alt="" /></p>
+<p>图中的小红点就是旋转点。那么如何才能以小蚂蚁的中心点来旋转呢？更改精灵的 <code>anchor</code> 属性值为 0.5：</p>
+<pre><code class=" js language- js">antSprite.setAnchor(0.5);</code></pre>
+<p>下图直观的对比了设置 <code>anchor</code> 后的变化：</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/LScdAUIwaJeNkwDhezhO.jpg@644w" alt="" /></p>
+<blockquote>
+  <p>注意</p>
+  <ul>
+  <li>通过设置 <code>anchor</code>，我们发现精灵的位置有所变化，这个点要 get 到；</li>
+  <li><code>anchor</code> 属性只属于 <code>Sprite</code>，也就是说通过 <code>Tiny.Sprite</code> 或继承自 <code>Sprite</code> 的 display 类创建的实例才可以设置。</li>
+  </ul>
+</blockquote>
+<p>当然，你还可以分别设置横向和纵向：</p>
+<pre><code class=" js language- js">antSprite.setAnchor(0.5, 1);</code></pre>
+<p>精灵还有一个属性是 <code>pivot</code>，这个和 <code>anchor</code> 很像。<code>pivot</code> 控制精灵的 x/y 源点（origin point）的位置。如果你更改了 <code>pivot</code> 再旋转精灵，它也会以这个源点进行旋转，下面的代码重设了精灵的 <code>pivot.x</code> 为28.5，<code>pivot.y</code> 为50.</p>
+<pre><code class=" js language- js">antSprite.setPivot(28.5, 50);</code></pre>
+<p>假设小蚂蚁的图片尺寸是 57*100 像素，那重设 <code>pivot</code> 后，就以它的中心点来旋转的。</p>
+<p>下图直观的对比了设置 <code>anchor =&gt; (0.5, 0.5)</code> 和设置 <code>pivot =&gt; (28.5, 50)</code> 后的变化（基本是一样的效果）：</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/AqeDXfZIntoXKAxMXnUR.jpg@640w" alt="" /></p>
+<blockquote>
+  <p>注意</p>
+  <ul>
+  <li>如果更改了精灵的 <code>pivot</code>，就同时也更改了它的 x/y 源点；</li>
+  <li><code>pivot</code> 属性属于基类 <code>DisplayObject</code>，也就是说任何 display 类创建的实例都可以设置。</li>
+  </ul>
+</blockquote>
+<p>那么，<code>anchor</code> 和 <code>pivot</code> 之间的区别是什么？它们确实很相似！<code>anchor</code> 改变精灵的图片纹理的源点，使用 0 - 1 之间的标准值，<code>pivot</code> 改变精灵的 <code>x</code> 和 <code>y</code> 源点，使用像素值。如何使用取决于你自己，你开心就好。</p>

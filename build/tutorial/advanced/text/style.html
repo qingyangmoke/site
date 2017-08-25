@@ -1,0 +1,27 @@
+<h1 id="样式">样式</h1>
+<p>设置 <code>style</code> 可以更改文字的样式：</p>
+<pre><code class=" js language- js">txt.style = {
+  fill: '0xff0000,
+  fontFamily: 'PetMe64',
+  fontSize: 16
+};</code></pre>
+<p>其他样式属性像 <code>stroke</code> 设置字体描边颜色，<code>strokeThickness</code> 设置描边粗细，<code>dropShadow</code> 设为 <code>true</code> 文字就有了阴影，<code>dropShadowColor</code> 让阴影换个16进制的颜色，<code>dropShadowDistance</code> 让阴影的距离变化一下。<br />
+也可以设置 <code>wordWrap</code> 为 <code>true</code> 让大段文字换行，当然要设置 <code>wordWrapWidth</code> 想要换行的最大宽度，<code>align</code> 可以设置多行文字的对其方式。</p>
+<pre><code class=" js language- js">txt.style = {
+  wordWrap: true,
+  wordWrapWidth: 100,
+  align: 'center'
+};</code></pre>
+<blockquote>
+  <p>注意</p>
+  <p><code>align</code> 不适应于单行文字</p>
+</blockquote>
+<p>如果你想要使用外部字体文件，使用 CSS 的 <code>@font-face</code> 规则，页面加载后，就可以设置文字的 <code>fontFamily</code> 来使用。</p>
+<pre><code class=" css language- css">@font-face {
+  font-family: "fontFamilyName";
+  src: url("fonts/fontFile.ttf");
+}</code></pre>
+<pre><code class=" js language- js">txt.style = {
+  fontFamily: 'fontFamilyName'
+};</code></pre>
+<p>别忘了在你的 CSS 文件里添加 <code>font-face</code> 规则。</p>

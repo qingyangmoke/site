@@ -1,0 +1,25 @@
+<h1 id="容器">容器</h1>
+<p>Container 可以作为任何显示对象的容器，<code>renderer</code> 所渲染的主 display =&gt; <code>camera</code> 就是一个 Container，所有显示对象的父集 <code>stage</code> 也是 Container。<br />
+你可以像下面这样创建一个容器：</p>
+<pre><code class=" js language- js">var container = new Tiny.Container();</code></pre>
+<p>然后，你可以把任何东东加进去：</p>
+<pre><code class=" js language- js">var sprite = Tiny.Sprite.fromImage('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/logo.png'); // 创建一个精灵
+var txt = new Tiny.Text('Tiny.js'); // 创建一个文字
+var g = new Tiny.Graphics(); // 创建一个图形
+g.beginFill(0xFF3300);
+g.lineStyle(10, 0xffd900, 1);
+g.drawRect(50, 250, 100, 100);
+g.endFill();
+
+// 将它们添加到 container 中
+container.addChild(sprite);
+container.addChild(txt);
+container.addChild(g);</code></pre>
+<p>然后，让你的 app 显示一下。</p>
+<pre><code class=" js language- js">app.run(container);</code></pre>
+<p>效果如下图：</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/WUbPbbjzrpePBqsyBzjX.png" alt="" /></p>
+<blockquote>
+  <p>Tips</p>
+  <p><code>camera</code> 下有两个显示对象，分别为舞台（<code>stage [Container]</code>）和帧频（<code>label [Text]</code>）。</p>
+</blockquote>

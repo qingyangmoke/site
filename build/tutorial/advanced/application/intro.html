@@ -1,0 +1,23 @@
+<h1 id="application-类">Application 类</h1>
+<p><code>Application</code> 是很重要的一个类，它是任何游戏的开始，它的实例化对象将会贯穿整个游戏逻辑，这样你可以使用它的 <code>start</code>、<code>pause</code>、<code>resume</code> 或 <code>stop</code> 来让游戏开始、暂停、继续和停止，也可以使用 <code>replaceScene</code> 来切换场景，<code>onUpdate</code> 在主调度里加入执行函数。</p>
+<h2 id="实例化">实例化</h2>
+<p>获取一个 <code>Application</code> 的实例化对象：</p>
+<pre><code class=" js language- js">var app = new Tiny.Application({..});</code></pre>
+<p>建议你将实例化的对象 app 挂在全局对象下，如：<code>window.app</code> 或 <code>Tiny.app</code></p>
+<h2 id="启动">启动</h2>
+<p>直接调用实例化对象 app 的 run 方法就启动了游戏：</p>
+<pre><code class=" js language- js">// 直接启动场景 sceneName
+app.run(sceneName);</code></pre>
+<blockquote>
+  <p>注意</p>
+  <ul>
+  <li>实例化对象 app 的 run 方法单页面只能执行一次，因为你的 App 一旦启动，再也“不能回头”，再启动就抛异常了；</li>
+  <li>既然“不能回头”，那就接着走，使用 <code>replaceScene</code> 切换场景，一篇一篇的走，详见<场景切换>。</li>
+  </ul>
+</blockquote>
+<h2 id="销毁">销毁</h2>
+<p>销毁实际上就是干掉整个游戏，此操作有一定的危险性，不过特殊场景合理使用即可：</p>
+<pre><code class=" js language- js">// 销毁但不清除 view（即：&lt;canvas&gt;）
+app.destroy();
+// 销毁并清除 view
+app.destroy(true);</code></pre>

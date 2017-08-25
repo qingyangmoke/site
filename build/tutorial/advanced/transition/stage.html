@@ -1,0 +1,25 @@
+<h1 id="舞台">舞台</h1>
+<p>舞台对象是一切显示对象的载体，你可以通过 <code>app.stage</code> 来获取舞台对象，但是，不建议直接操作它。</p>
+<p>最佳的使用姿势是：创建多个场景（<code>scene</code>），让每一个 <code>scene</code> 来承载所有的显示对象，这样你可以通过 <code>app.replaceScene</code> 轻松切换每一个场景，就像一场完美的舞台剧。<br />
+通过图来更直观的理解：</p>
+<pre><code>        +-----------+
+        |   camera  |
+        +-----^-----+
+              |
+ +------------+-----------+
+ |          stage         |
+ +--^---------^--------^--+
+    |         |        |
++---+---+ +---+---+ +--+------------+
+| scene | | scene | |      ...      |
++-------+ +-------+ +-^-----^-----^-+
+                      |     |     |
+      +---------------++ +--+--+ ++---------------+
+      | dispaly object | | ... | | display object |
+      +----------------+ +-----+ +----------------+</code></pre>
+<p>那么，我们先简单了解一下如何进行场景切换：</p>
+<pre><code class=" js language- js">var scene1 = new Tiny.DisplayObject();
+app.replaceScene(scene1);
+...
+var scene2 = new Tiny.DisplayObject();
+app.replaceScene(scene2);</code></pre>

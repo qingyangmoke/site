@@ -1,0 +1,79 @@
+<h1 id="创建纹理">创建纹理</h1>
+<p>那么，问题来了，如何加载并转换一张图片为一个可用的纹理？</p>
+<h2 id="使用-fromimage">使用 fromImage</h2>
+<p>创建纹理的姿势有很多，最通用的就是通过 <code>Texture</code> 的静态方法 <code>fromImage</code> 传递一个图片链接来创建：</p>
+<pre><code class=" js language- js">var texture = Tiny.Texture.fromImage('images/ant.png');</code></pre>
+<p>接着，你可以直接使用 texture，也可以在其他地方从 <code>TextureCache</code> 里拿到：</p>
+<pre><code class=" js language- js">console.log(Tiny.TextureCache['images/ant.png']);</code></pre>
+<blockquote>
+  <p>注意</p>
+  <p>如果用不到加载器，且使用 <code>Sprite</code> 的静态方法 <code>fromImage</code> 创建精灵后要获取到它的宽高，那你得到一定是 <code>{1, 1}</code>，因为没有预加载，图片要通过实例化 <code>Image</code> 对象来加载， <code>new Image()</code> 是异步的，无论在线图片还是本地的，所以此时你需要创建纹理，并监听纹理的 <code>update</code>：</p>
+<pre><code class=" js language- js">var texture = Tiny.Texture.fromImage('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/logo.png');
+var sprite = new Tiny.Sprite(texture);
+// 如果纹理没有销毁，那么此监听回调只调用一次（慎用）
+texture.on('update',function () {
+  console.log('w:',sprite.width, ', h:', sprite.height);
+  // w: 300, h: 300
+});</code></pre>
+</blockquote>
+<h2 id="使用加载器">使用加载器</h2>
+<p>使用加载器 <code>Tiny.Loader</code> 也可以缓存纹理来使用：</p>
+<pre><code class=" js language- js">var loader = new Tiny.loaders.Loader();
+loader
+  .add('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/ants/ant.png')
+  .load(function(){
+    var texture = Tiny.TextureCache['https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/ants/ant.png'];
+    console.log(texture);
+  });</code></pre>
+<p>你也可以从 loader 的 <code>resources</code> 对象中获取到纹理，像这样：</p>
+<pre><code class=" js language- js">var texture = loader.resources['images/ant.png'].texture;
+console.log(texture);</code></pre>
+<p>纹理创建出来了，就可以用它来创建精灵了：</p>
+<pre><code class=" js language- js">var sprite = new Tiny.Sprite(texture);</code></pre>
+<p>实际上，最优雅的姿势是使用 <code>Tiny.Loader.run({..})</code> 把所有或当前场景所需的资源都加载了，再直接通过静态方法 <code>Tiny.Sprite.fromImage('..')</code> 来创建精灵。</p>
+<blockquote>
+  <p>Tips</p>
+  <p>如果场景特殊，不需要提前加载资源，也可以直接使用 <code>Tiny.Sprite.fromImage('..')</code> 来创建精灵，Tiny.js 会 <code>new Image()</code> 来实时加载图片。当然，强烈建议不要这样，网络环境很差时，体验很糟糕。</p>
+</blockquote>
+<h2 id="使用-image-对象或-canvas">使用 Image 对象或 Canvas</h2>
+<p>使用加载器并缓存到<code>纹理缓存</code>里来创建精灵是最优且效率最高的方式，特殊场景可以通过 Image 对象来制作纹理，这时你就需要用到 <code>BaseTexture</code> 和 <code>Texture</code> 类：</p>
+<pre><code class=" js language- js">var image = new Image();
+image.crossOrigin = 'Anonymous';https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/logo.png
+image.src = 'https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/logo.png';
+var base = new Tiny.BaseTexture(image);
+var texture = new Tiny.Texture(base);</code></pre>
+<p>可以通过 <code>BaseTexture.fromCanvas</code> 静态方法来通过存在的 Canvas 对象来制作纹理：</p>
+<pre><code class=" js language- js">var base = Tiny.BaseTexture.fromCanvas(anyCanvasElement);
+var texture = new Tiny.Texture(base);</code></pre>
+<p>不使用静态方法就是这样的：</p>
+<pre><code class=" js language- js">var base = new Tiny.BaseTexture(anyCanvasElement);
+var texture = new Tiny.Texture(base);</code></pre>
+<h2 id="使用视频">使用视频</h2>
+<p>视频资源的加载往往就是用到此姿势，我们先来看看如果使用视频资源创建纹理：</p>
+<pre><code class=" js language- js">var texture = Tiny.Texture.fromVideo('https://os.alipayobjects.com/rmsportal/QSOJoFHAtLqVHppcEKHj.mp4');</code></pre>
+<h2 id="使用-from">使用 from</h2>
+<p>这是 <code>Texture</code> 类的万能静态方法，它会自己判定资源类型，不信我们看看：</p>
+<p>图片链接：</p>
+<pre><code class=" js language- js">var texture = Tiny.Texture.from('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/logo.png');</code></pre>
+<p>视频链接：</p>
+<pre><code class=" js language- js">var texture = Tiny.Texture.from('https://os.alipayobjects.com/rmsportal/QSOJoFHAtLqVHppcEKHj.mp4');</code></pre>
+<p>HTMLImageElement：</p>
+<pre><code class=" js language- js">var image = new Image();
+image.crossOrigin = 'Anonymous';
+image.src = 'https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/logo.png';
+var texture = Tiny.Texture.from(image);</code></pre>
+<p>HTMLCanvasElement：</p>
+<pre><code class=" js language- js">var canvas = document.createElement('canvas');
+var ctx = canvas.getContext('2d');
+ctx.fillStyle = 'green';
+ctx.fillRect(10, 10, 100, 100);
+var texture = Tiny.Texture.from(canvas);</code></pre>
+<p>HTMLVideoElement：</p>
+<pre><code class=" js language- js">var video = document.createElement('video');
+video.crossOrigin = 'Anonymous';
+video.src = 'https://os.alipayobjects.com/rmsportal/QSOJoFHAtLqVHppcEKHj.mp4';
+var texture = Tiny.Texture.from(video);</code></pre>
+<blockquote>
+  <p>Tips</p>
+  <p>无论通过什么方式创建纹理，Tiny 都会把它添加到“纹理缓存”里，并且创建之前都会去“纹理缓存”中查找，所以，你可以通过任何方式重复创建，不要担心性能问题。</p>
+</blockquote>

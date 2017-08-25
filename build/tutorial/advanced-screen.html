@@ -1,0 +1,118 @@
+<h1 id="屏幕适配">屏幕适配</h1>
+<h2 id="移动端">移动端</h2>
+<p>Tiny.js 致力于移动端表现，也期望能用最少的配置达到全端自适应。</p>
+<table>
+<thead>
+<tr>
+<th id="场景">场景</th>
+<th id="图例（截屏基于：iphone_5_[320\*568]）">图例（截屏基于：iPhone 5 [320*568]）</th>
+<th id="启动参数">启动参数</th>
+<th id="备注">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全屏（320）</td>
+<td><img src="https://gw.alipayobjects.com/zos/rmsportal/HacXHZTBrffazGZyaluP.png?x-oss-process=image/resize,p_50" alt="" /></td>
+<td>无</td>
+<td><a href="https://gw.alipayobjects.com/zos/rmsportal/HacXHZTBrffazGZyaluP.png">原图链接</a><br><br><a href="https://github.com/yiiqii/blog/tree/master/code/tiny/screenadaptation/mobile_r320.html">示例源码</a></td>
+</tr>
+<tr>
+<td>全屏（375）</td>
+<td><img src="https://gw.alipayobjects.com/zos/rmsportal/npGjQEryideiGJvQJVqf.png?x-oss-process=image/resize,p_50" alt="" /></td>
+<td><code>referWidth: 375</code></td>
+<td><a href="https://gw.alipayobjects.com/zos/rmsportal/npGjQEryideiGJvQJVqf.png">原图链接</a><br><br><a href="https://github.com/yiiqii/blog/tree/master/code/tiny/screenadaptation/mobile_r375.html">示例源码</a></td>
+</tr>
+<tr>
+<td>全屏（高 667）</td>
+<td><img src="https://gw.alipayobjects.com/zos/rmsportal/npGjQEryideiGJvQJVqf.png?x-oss-process=image/resize,p_50" alt="" /></td>
+<td><code>referWidth: 667 * window.innerWidth / window.innerHeight</code></td>
+<td><a href="https://gw.alipayobjects.com/zos/rmsportal/npGjQEryideiGJvQJVqf.png">原图链接</a><br><br><a href="https://github.com/yiiqii/blog/tree/master/code/tiny/screenadaptation/mobile_r667_h.html">示例源码</a></td>
+</tr>
+<tr>
+<td>全屏（320 横屏）</td>
+<td><img src="https://gw.alipayobjects.com/zos/rmsportal/nMQoFTjxCnRjCANnsHFX.png?x-oss-process=image/resize,p_50" alt="" /></td>
+<td><code>orientation: 1</code></td>
+<td><a href="https://gw.alipayobjects.com/zos/rmsportal/nMQoFTjxCnRjCANnsHFX.png">原图链接</a><br><br><a href="https://github.com/yiiqii/blog/tree/master/code/tiny/screenadaptation/mobile_r320_landscape.html">示例源码</a></td>
+</tr>
+<tr>
+<td>全屏（375 横屏）</td>
+<td><img src="https://gw.alipayobjects.com/zos/rmsportal/BbBXuvfrtclsWbrwwpcG.png?x-oss-process=image/resize,p_50" alt="" /></td>
+<td><code>orientation: 1</code><br><code>referWidth: 375</code></td>
+<td><a href="https://gw.alipayobjects.com/zos/rmsportal/BbBXuvfrtclsWbrwwpcG.png">原图链接</a><br><br><a href="https://github.com/yiiqii/blog/tree/master/code/tiny/screenadaptation/mobile_r375_landscape.html">示例源码</a></td>
+</tr>
+<tr>
+<td>固定尺寸（280*180）</td>
+<td><img src="https://gw.alipayobjects.com/zos/rmsportal/TfTYdCvDvAXkEnfjPyOo.png" alt="" /></td>
+<td><code>height: 180</code><br><code>width: 280</code><br><code>fixSize: true</code></td>
+<td><a href="https://gw.alipayobjects.com/zos/rmsportal/TfTYdCvDvAXkEnfjPyOo.png">原图链接</a><br><br><a href="https://github.com/yiiqii/blog/tree/master/code/tiny/screenadaptation/mobile_fixsize.html">示例源码</a></td>
+</tr>
+<tr>
+<td>固定尺寸（280*180 弹性）</td>
+<td><img src="https://gw.alipayobjects.com/zos/rmsportal/FDvHeYWOfHRPKBSplDdE.png" alt="" /></td>
+<td><code>height: 180</code><br><code>width: 280</code></td>
+<td><a href="https://gw.alipayobjects.com/zos/rmsportal/FDvHeYWOfHRPKBSplDdE.png">原图链接</a><br><br><a href="https://github.com/yiiqii/blog/tree/master/code/tiny/screenadaptation/mobile_stretch.html">示例源码</a></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+  <p>Tips</p>
+  <ul>
+  <li><code>全屏（320）</code>：以宽（640）的视觉设计尺寸，以宽为参考</li>
+  <li><code>全屏（375）</code>：以宽（750）的视觉设计尺寸，以宽为参考</li>
+  <li><code>全屏（高 667）</code>：以宽（750）的视觉设计尺寸，以高（1334）为参考</li>
+  <li><code>全屏（320 横屏）</code>：以高（640）的视觉设计尺寸，以高为参考</li>
+  <li><code>全屏（375 横屏）</code>：以高（750）的视觉设计尺寸，以高为参考</li>
+  <li><code>固定尺寸（280*180）</code>：以宽（560）、高（360）的视觉设计尺寸，任何分辨率的设备宽高都是固定的像素值（移动端不推荐）</li>
+  <li><code>固定尺寸（280*180 弹性）</code>：以宽（560）、高（360）的视觉设计尺寸，任何分辨率的设备宽高都以当前设备分辨率弹性计算（类似 rem）</li>
+  </ul>
+</blockquote>
+<p>下面我们对上表进行补充说明：</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/CBnvfLCmqsWckUYGulGY.jpg" alt="" /></p>
+<p>上图视觉的设计尺寸是宽 640，那么它的 <code>dpi</code> 就是 2，<code>referWidth</code> 是 320，故启动参数为：</p>
+<pre><code class=" js language- js">{
+  dpi: 2,
+  referWidth: 320,
+}</code></pre>
+<p>为更直接的对比，我们使用一个简单的标尺衡量一下：</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/ihjiBgbkfFriqlmhGHwK.jpg" alt="" /></p>
+<p>如果视觉的设计尺寸是宽 750，那么它的 <code>dpi</code> 还是 2，<code>referWidth</code> 就是 375，故启动参数为：</p>
+<pre><code class=" js language- js">{
+  dpi: 2,
+  referWidth: 375,
+}</code></pre>
+<p>如果有些场景需要我们以高为参考对象（即场景中的精灵的位置只能通过纵向设定），那么，我们需要对 <code>referWidth</code> 做一下换算，即：</p>
+<pre><code class=" js language- js">{
+  dpi: 2,
+  referWidth: 667 * window.innerWidth / window.innerHeight,
+}</code></pre>
+<p>换算公式：<code>(视觉稿高度 / 2) * 显示宽度 / 显示高度</code></p>
+<p>如果不是全屏的场景，那么就直接使用固定宽高值就行，但是最好不要（除非情况特殊）固定尺寸，这样 Tiny.js 才会帮你自动适配：</p>
+<pre><code class=" js language- js">{
+  dpi: 2,
+  height: 180,
+  width: 280,
+}</code></pre>
+<h2 id="pc">PC</h2>
+<p>PC 场景下，基本就只要固定尺寸就行，如果是全屏，那么启动参数就是：</p>
+<pre><code class=" js language- js">{
+  height: window.innerHeight,
+  width: window.innerWidth,
+  fixSize: true,
+}</code></pre>
+<p><a href="https://github.com/yiiqii/blog/tree/master/code/tiny/screenadaptation/pc_fullscreen.html">示例源码</a></p>
+<p>如果不是全屏，直接设置宽高就可以：</p>
+<pre><code class=" js language- js">{
+  height: 400,
+  width: 780,
+  fixSize: true,
+}</code></pre>
+<p><a href="https://github.com/yiiqii/blog/tree/master/code/tiny/screenadaptation/pc_presetsize.html">示例源码</a></p>
+<h2 id="tinywin_size">Tiny.WIN_SIZE</h2>
+<p>可见区域的尺寸应该在很多时候都会用到，Tiny 提供了一个全局静态变量 <code>WIN_SIZE</code>，通过它可以快速获取的可见区域的尺寸：</p>
+<pre><code class=" js language- js">console.log(Tiny.WIN_SIZE);
+//=&gt; {width: 560, height: 360}</code></pre>
+<blockquote>
+  <p>注意</p>
+  <p><code>Tiny.WIN_SIZE</code> 是根据适配计算得出的，所以，它是安全可靠的，以它为标准去定位场景中各个精灵的位置是准确高效的。</p>
+</blockquote>

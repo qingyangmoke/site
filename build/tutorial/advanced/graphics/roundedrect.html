@@ -1,0 +1,9 @@
+<h1 id="圆角矩形">圆角矩形</h1>
+<p>你可以使用 <code>drawRoundedRect</code> 方法来创建圆角矩形，最后一个参数 <code>cornerRadius</code> 就是圆角值（像素）。</p>
+<pre><code class=" js language- js">drawRoundedRect(x, y, width, height, cornerRadius)</code></pre>
+<p>下面创建一个圆角半径是10像素的黄色圆角矩形：</p>
+<pre><code class=" js language- js">var roundRect = new Tiny.Graphics();
+roundRect.lineStyle(4, 0x99CCFF, 1);
+roundRect.beginFill(0xFF9933);
+roundRect.drawRoundedRect(0, 0, 84, 36, 10);
+roundRect.endFill();</code></pre>

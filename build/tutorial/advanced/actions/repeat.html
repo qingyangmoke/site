@@ -1,0 +1,14 @@
+<h1 id="重复">重复</h1>
+<p>使用静态方法 <code>Repeat</code>，可以让动画重复，现在我们让 <code>Blink</code> 动画重复执行3次：</p>
+<pre><code class=" js language- js">var action = Tiny.Blink(500, 100);
+sprite.runAction(Tiny.Repeat(3, action));</code></pre>
+<p>当然，你可以使用 <code>RepeatForever</code> 让永远重复下去，实际上它就是 <code>Repeat</code> 的第一个参数传入 <code>Infinity</code>。</p>
+<blockquote>
+  <p>Tips</p>
+  <p>如果是<code>Repeat</code>或<code>RepeatForever</code>以下 action：<code>MoveBy</code>、<code>ScaleBy</code>、<code>RotateBy</code>或<code>TintBy</code>，覆盖<code>onStart</code>、<code>onUpdate</code>或<code>onComplete</code>时，要记得恢复原行为，如：</p>
+<pre><code class=" js language- js">action.onComplete = function (tween, object) {
+  this._onComplete.call(this, tween, object);
+  //do any you want
+};
+sprite.runAction(Tiny.RepeatForever(moveByAction));</code></pre>
+</blockquote>

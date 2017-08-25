@@ -1,0 +1,34 @@
+<h1 id="加载器">加载器</h1>
+<p>我们了解了加载器的基本使用方法，不过，还有更多的姿势。<br />
+Tiny.js 的加载器是基于 <a href="https://github.com/englercj/resource-loader">resource-loader</a>，所以你可以直接使用 resource-loader 的接口。</p>
+<h4 id="给加载的资源设定-name">给加载的资源设定 name</h4>
+<p>如果需要，你可以给每一个资源设置一个唯一的 name，如果不设置，默认就是资源的传入链接的字符串。</p>
+<pre><code class=" js language- js">Tiny.Loader
+  .add('antImage', 'images/ant.png')
+  .load(function(){..});</code></pre>
+<p>这里在 <code>Tiny.Loader.resources</code> 下创建了一个叫 <code>antImage</code> 的对象，这就意味着你可以引用这个对象来创建精灵：</p>
+<pre><code class=" js language- js">var antSprite = new Tiny.Sprite(Tiny.Loader.resources['antImage'].texture);</code></pre>
+<p>再强调一下，非特殊需要不要这样去用！要记的东西多了会让你耽误不必要的时间。</p>
+<h4 id="监测加载进度">监测加载进度</h4>
+<p>你可以通过 <code>resource-loader</code> 的 <code>progress</code> 事件来监听加载进度：</p>
+<pre><code class=" js language- js">Tiny.Loader.on('progress', progressHandler);
+function progressHandler(loader, resource) {
+  console.log('url =&gt; ' + resource.url, 'name =&gt; ' + resource.name);
+  console.log('progress =&gt; ', loader.progress + '%');
+}</code></pre>
+<p>也可以使用 Tiny.js 提供的整体方案：</p>
+<pre><code class=" js language- js">Tiny.Loader.run({
+  resources: [..],
+  // 加载进度
+  onProgress: function(per, resource){
+    console.log('url =&gt; ' + resource.url, 'name =&gt; ' + resource.name);
+    console.log('percent =&gt; ', per + '%');
+  }
+});</code></pre>
+<blockquote>
+  <p>Tips</p>
+  <ul>
+  <li>有一些额外的属性在 <code>resource</code> 上，<code>resource.error</code> 会告诉你一些可能错误原因，<code>resource.data</code> 获取文件的二进制数据。</li>
+  <li>更多的特性，比如：<code>add</code> 方法的更多入参、<code>reset</code> 方法等请移步 <a href="https://github.com/englercj/resource-loader">resource-loader</a></li>
+  </ul>
+</blockquote>

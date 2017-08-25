@@ -1,0 +1,104 @@
+<h1 id="公共方法">公共方法</h1>
+<p>Tiny.js 暴露出很多常用的公共方法，下面列出一些：</p>
+<table>
+<thead>
+<tr>
+<th id="方法名" style="text-align:left;">方法名</th>
+<th id="描述" style="text-align:left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"><code>isArray</code></td>
+<td style="text-align:left;">是否是<code>Array</code>类型</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>isFunction</code></td>
+<td style="text-align:left;">是否是函数类型</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>isNumber</code></td>
+<td style="text-align:left;">是否是<code>Number</code>类型</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>isString</code></td>
+<td style="text-align:left;">是否是<code>String</code>类型</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>isUndefined</code></td>
+<td style="text-align:left;">是否是<code>Undefined</code>类型</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>isObject</code></td>
+<td style="text-align:left;">是否是<code>Object</code>类型</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>getTime</code></td>
+<td style="text-align:left;">高精度获取当前时间，比 <code>Date.now()</code> 的精度高1000倍</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>random(min&lt;Number&gt;, max&lt;Number&gt;)</code></td>
+<td style="text-align:left;">返回入参区间内的随机整数</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>randomInt</code></td>
+<td style="text-align:left;">原生的 random</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>randomFloat(min&lt;Number&gt;, max&lt;Number&gt;)</code></td>
+<td style="text-align:left;">返回入参区间内的随机浮点数</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>randomBool(chance&lt;Boolean&gt;)</code></td>
+<td style="text-align:left;">返回小于 chance 的布尔概率</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>randomPM(chance&lt;Boolean&gt;)</code></td>
+<td style="text-align:left;">按 chance 概率随机返回 -1 或 1</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>randomFromArray(arr&lt;Array&gt;)</code></td>
+<td style="text-align:left;">随机返回数组 arr 里的某个值</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>hex2rgb(hex&lt;Number&gt;, out&lt;Array&gt;)</code></td>
+<td style="text-align:left;">转换16进制颜色值为 <R, G, B> 数组</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>hex2string(hex&lt;Number&gt;)</code></td>
+<td style="text-align:left;">转换16进制颜色值为字符类型</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>rgb2hex(rgb&lt;Array&gt;)</code></td>
+<td style="text-align:left;">转换 <R, G, B> 数组为16进制颜色值</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>color2hex(color&lt;Tiny.color&gt;)</code></td>
+<td style="text-align:left;">转换 color 对象为二进制颜色值</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>hex2color(hex&lt;Number&gt;)</code></td>
+<td style="text-align:left;">转换 hex 为 color 对象</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>deg2radian(deg&lt;Number&gt;)</code></td>
+<td style="text-align:left;">角度转弧度</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>radian2deg(radian&lt;Number&gt;)</code></td>
+<td style="text-align:left;">弧度值转角度</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>removeItems(arr&lt;Array&gt;, startIdx&lt;Number&gt;, removeCount&lt;Number&gt;)</code></td>
+<td style="text-align:left;">移除数组中的某段范围的值</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>arrayRemoveObject(arr&lt;Array&gt;, delObj&lt;Object&gt;)</code></td>
+<td style="text-align:left;">移除数组中的某个值</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>detect(obj&lt;Object&gt;, iterator&lt;Funciton&gt;, context&lt;Object&gt;, arg1, arg2)</code></td>
+<td style="text-align:left;">对对象 obj 迭代 iterator</td>
+</tr>
+</tbody>
+</table>

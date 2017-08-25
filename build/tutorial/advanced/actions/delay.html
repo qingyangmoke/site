@@ -1,0 +1,24 @@
+<h1 id="延迟">延迟</h1>
+<p>使用 <code>Action</code> 的 <code>setDelay</code> 方法，可以设置动画的延迟：</p>
+<pre><code class=" js language- js">var action = Tiny.ScaleBy(1200, Tiny.scale(0.25, 4.5));
+// 设置250ms的延迟
+action.setDelay(250);
+sprite.runAction(Tiny.Back(action));</code></pre>
+<h2 id="重复的延迟">重复的延迟</h2>
+<p>你可以对一个重复或永久重复的动画设置一个延迟，有多种方式，我们逐个阐述一下：</p>
+<ol>
+<li><p>使用 Action 实例的 <code>setRepeatDelay</code> 方法。</p>
+<pre><code class=" js language- js">var action = Tiny.RotateTo(2000, {rotation: Tiny.deg2radian(360)});
+// 设置重复 3000ms 的延迟
+action.setRepeatDelay(3000);
+// 执行重复3次的动画
+sprite.runAction(Tiny.Repeat(3, action));</code></pre></li>
+<li><p>透传静态方法 <code>Repeat</code> 的第三个参数。</p>
+<pre><code class=" js language- js">// 执行重复3次 3000ms 延迟的动画
+sprite.runAction(Tiny.Repeat(3, action, 3000));</code></pre></li>
+</ol>
+<p>永久重复也是一样的：</p>
+<pre><code class=" js language- js">action.setRepeatDelay(3000);
+sprite.runAction(Tiny.RepeatForever(action));
+// 或者
+sprite.runAction(Tiny.RepeatForever(action, 3000));</code></pre>

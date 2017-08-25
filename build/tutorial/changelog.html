@@ -1,0 +1,42 @@
+<h2 id="113">1.1.3</h2>
+<p><code>2017-08-25</code></p>
+<ul>
+<li>修复频繁移除显示对象后导致 <code>Tiny.TWEEN.update</code> 抛出的异常</li>
+</ul>
+<h2 id="111">1.1.1</h2>
+<p><code>2017-08-21</code></p>
+<ul>
+<li>修复 Tween 动画结束后，直接调用<code>Tiny.TWEEN.remove</code>引起的报错</li>
+<li>使用 tileset 时，因网络问题或异常导致图片没有加载成功，触发的 Texture <code>set frame</code> 抛出异常，在 <code>spritesheetParser</code> 加载图片后做了兼容处理</li>
+<li>增加<code>Container</code>方法，<code>removeActions</code>和<code>removeActionsTrace</code>，用于移除 actions</li>
+<li>性能优化：显示对象被 remove 后，自动清除其及子集的所有的 actions</li>
+</ul>
+<h2 id="110">1.1.0</h2>
+<p><code>2017-08-11</code></p>
+<ul>
+<li>增加启动参数<code>referWidth</code>，基准参考宽度可以通过此参数配置</li>
+<li>增加<code>DisplayObject</code>的方法<code>setSkew</code>、<code>getSkew</code>，并且通过<code>getNature</code>也能获取到 skew 值</li>
+<li>性能优化：修改<code>Application</code>的控制方法<code>start</code>和<code>stop</code>，避免压后台后千分之二的闪退率</li>
+<li>移除<code>Tiny.Action</code>的<code>continue</code>方法，换成<code>resume</code>替代</li>
+</ul>
+<h2 id="102">1.0.2</h2>
+<p><code>2017-08-01</code></p>
+<ul>
+<li>增加<code>Application.onUpdate</code>的解绑函数<code>offUpdate</code></li>
+<li>增加<code>Ticker.countDown</code>，可用于定时触发</li>
+<li>增加<code>TextureTransform</code>类</li>
+<li>增加<code>Tiny.Action.clone</code>方法，可以克隆所有的<code>Action</code></li>
+<li>增加<code>Tiny.Action</code>的<code>pause</code>、<code>continue</code>、<code>stop</code>、<code>isPlaying</code>方法，可以获得并控制动作的状态</li>
+<li>增加<code>Tiny.color</code>转换为 hex 方法 <code>Tiny.color2hex</code></li>
+<li>增加启动参数<code>fixSize</code>，用于固定尺寸为传入的宽高</li>
+<li>重写了 Application 的<code>resize</code>内部方法，更智能</li>
+<li>修复了 actions 与 repeatTimes、delay 同时使用时的无效情况</li>
+<li><code>AnimatedSprite</code> 可以通过其 <code>reverse</code> 方法反转动画</li>
+</ul>
+<h2 id="101">1.0.1</h2>
+<p><code>2017-06-23</code></p>
+<ul>
+<li><code>actionBy</code>的体验问题修复，与主流引擎一致</li>
+</ul>
+<h2 id="100">1.0.0</h2>
+<p><code>2017-06-16</code></p>

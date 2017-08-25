@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Tiny.DragonBones.TinyArmatureDisplay.html">TinyArmatureDisplay</a><ul class='methods'><li data-type='method'><a href="Tiny.DragonBones.TinyArmatureDisplay.html#dispose">dispose</a></li><li data-type='method'><a href="Tiny.DragonBones.TinyArmatureDisplay.html#play">play</a></li></ul></li><li><a href="Tiny.DragonBones.TinyFactory.html">TinyFactory</a><ul class='methods'><li data-type='method'><a href="Tiny.DragonBones.TinyFactory.html#buildArmatureDisplay">buildArmatureDisplay</a></li><li data-type='method'><a href="Tiny.DragonBones.TinyFactory.html#getTextureDisplay">getTextureDisplay</a></li></ul></li><li><a href="Tiny.DragonBones.TinySlot.html">TinySlot</a></li><li><a href="Tiny.DragonBones.TinyTextureAtlasData.html">TinyTextureAtlasData</a><ul class='methods'><li data-type='method'><a href="Tiny.DragonBones.TinyTextureAtlasData.html#.toString">toString</a></li><li data-type='method'><a href="Tiny.DragonBones.TinyTextureAtlasData.html#generateTexture">generateTexture</a></li></ul></li></ul><h3>Externals</h3><ul><li><a href="external-dragonBones.html">dragonBones</a></li><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Namespaces</h3><ul><li><a href="Tiny.DragonBones.html">DragonBones</a><ul class='methods'><li data-type='method'><a href="Tiny.DragonBones.html#.addDragonBonesData">addDragonBonesData</a></li><li data-type='method'><a href="Tiny.DragonBones.html#.addTextureAtlasData">addTextureAtlasData</a></li><li data-type='method'><a href="Tiny.DragonBones.html#.buildArmatureDisplay">buildArmatureDisplay</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>tinyjs-plugin-dragonbones</h1><blockquote>
+<p>骨骼动画</p>
+</blockquote>
+<h2>查看demo</h2><p><code>demo/index.html</code></p>
+<h2>引用方法</h2><ul>
+<li><p>推荐作为依赖使用</p>
+<ul>
+<li><code>npm install tinyjs-plugin-dragonbones --save</code></li>
+</ul>
+</li>
+<li><p>也可以直接引用线上cdn地址，注意要使用最新的版本号，例如：</p>
+<ul>
+<li>https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-dragonbones/0.0.1/index.js</li>
+<li>https://a.alipayobjects.com/g/tiny-plugins/tinyjs-plugin-dragonbones/0.0.1/index.debug.js</li>
+</ul>
+</li>
+</ul>
+<h2>示例</h2><p> 参考 ./demo/index.html</p>
+<h2>第三方库</h2><ul>
+<li><a href="http://tinyjs.net/#/docs/api">Tiny.js</a></li>
+<li><a href="https://github.com/DragonBones/DragonBonesJS">DragonBonesJS</a></li>
+</ul>
+<h2>工具</h2><ul>
+<li><a href="http://dragonbones.com/cn/index.html">DragonBones Pro</a></li>
+</ul>
+<h2>API文档</h2><h3>创建骨骼动画</h3><blockquote>
+<p>参考 demo/index.html</p>
+</blockquote>
+<ol>
+<li><p>首先从DragonBones Pro中导出一份骨骼动画数据</p>
+</li>
+<li><p>将导出的Dragon_ske.json，Dragon_tex.json和Dragon_tex.png 添加到项目组中。</p>
+</li>
+<li><p>使用Tiny.Loader模块加载资源完成后，可以创建基于DragonBones的骨骼动画。</p>
+</li>
+</ol>
+<pre class="prettyprint source lang-javascript"><code>
+ Tiny.Loader
+      .add(&quot;dragonBonesData&quot;, &quot;./resource/Dragon/Dragon_ske.json&quot;)
+      .add(&quot;textureDataA&quot;, &quot;./resource/Dragon/Dragon_tex.json&quot;)
+      .add(&quot;textureA&quot;, &quot;./resource/Dragon/Dragon_tex.png&quot;)
+      .load(function ()       {
+        initDragon();
+      });</code></pre><p>4.实例化DragonBones所需要的数据。</p>
+<pre class="prettyprint source lang-javascript"><code>
+
+//设置别名
+var dragonBones = Tiny.DragonBones;
+var resources = Tiny.Loader.resources;
+
+
+function initDragon1() {
+
+     // 将骨骼数据添加到骨架系统中
+      dragonBones.addDragonBonesData(resources[&quot;dragonBonesData&quot;].data);
+      dragonBones.addTextureAtlasData(resources[&quot;textureDataA&quot;].data, resources[&quot;textureA&quot;].texture);
+
+    // 通过buildArmature方法，我们提取名称为robot的骨架,一个包含骨架数据的Tiny.Container对象。要想在舞台中看到该骨架，我们需要将其显性的添加到的舞台当中
+      armatureDisplay = dragonBones.buildArmatureDisplay('Dragon');
+      armatureDisplay.x = app.renderer.width * 0.5;
+      armatureDisplay.y = app.renderer.height * 0.5 + 150;
+      armatureDisplay.scale.set(-0.3, 0.3);
+
+      // 播放骨骼动画 动画名字需要在在DragonBones Pro中定义   如 fall、jump、stand、walk
+      // 也可以使用 armatureDisplay.animation.play(&quot;walk&quot;);
+      var animationState = armatureDisplay.play('walk');
+
+      container.addChild(armatureDisplay);
+    }</code></pre><h3>多人物骨骼动画</h3><blockquote>
+<p>参考 ./demo/multi.html</p>
+</blockquote>
+<h3>改变动画速度</h3><blockquote>
+<p>有时在游戏的运行过程中，需要动态的改变动画的播放速度。对时钟的调节一般是要影响一组动画。直接调节animation中的timeScale属性即可。</p>
+</blockquote>
+<pre class="prettyprint source lang-javascript"><code>      var animationState = armatureDisplay.play('walk');
+
+      // 调节动画速度为1.5倍
+      armatureDisplay.animation.timeScale = 1.5;</code></pre><p>参考demo/timescale.html</p>
+<h3>动画遮罩</h3><blockquote>
+<p>动画遮罩就是只将动画的一部分呈现出来，例如下面的代码，将只播放head和body两个骨头的跑步动画，其他骨头将维持原姿势不动。</p>
+</blockquote>
+<pre class="prettyprint source lang-javascript"><code>
+   var animationState = armatureDisplay.play('walk');
+// 动画遮罩  就是只将动画的一部分呈现出来，例如下面的代码，将只播放head和body两个骨头的跑步动画，其他骨头将维持原姿势不动。
+   animationState.addBoneMask(&quot;head&quot;);
+   animationState.addBoneMask(&quot;body&quot;);</code></pre><p>参考demo/bonemask.html</p>
+<h3>动画混合</h3><blockquote>
+<p>动画混合是指一个骨架同时可以播放多个动画。例如下面的代码,可以让角色同时播放walk和fall的动画。</p>
+</blockquote>
+<pre class="prettyprint source lang-javascript"><code>
+//设置别名
+var dragonBones = Tiny.DragonBones;
+
+armatureDisplay.animation.fadeIn(&quot;walk&quot;,0,-1,0,0,&quot;UPPER_BODY_GROUP&quot;,dragonBones.Animation.SAME_GROUP);
+
+armatureDisplay.animation.fadeIn(&quot;fall&quot;,0,-1,0,0,&quot;LOWER_BODY_GROUP&quot;,dragonBones.Animation.SAME_GROUP);</code></pre><p>参考demo/mixed.html</p>
+<h3>调试骨骼</h3><pre class="prettyprint source lang-javascript"><code>
+ armatureDisplay.debugDraw = true;</code></pre><p>参考demo/debugdraw.html</p></article>
+    </section>
+
+
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        TinyFactory.js
+        </h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="TinyFactory.js.html">TinyFactory.js</a>, <a href="TinyFactory.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>清扬陌客 &lt;qingyangmoke@qq.com></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+        
+            <div class="description">Tiny.DragonBone.TinyFactory</div>
+        
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Aug 25 2017 12:44:32 GMT+0800 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

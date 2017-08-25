@@ -1,0 +1,29 @@
+<h1 id="简单粒子">简单粒子</h1>
+<blockquote>
+  <p>插件名：Dust<br />
+  npm：tinyjs-plugin-dust</p>
+</blockquote>
+<p>Tiny.js 扩展模块提供一个简单的粒子特效，你可以通过 <code>Tiny.Dust</code> 来创建，只是你可能要传好多的参数，举个栗子：</p>
+<pre><code class=" js language- js">var container = new Tiny.Container();
+// 创建一个位置为 150/50 的❤️形粒子
+var dust = new Tiny.Dust(150, 50, function () {
+  return new Tiny.Sprite.fromImage('https://zos.alipayobjects.com/rmsportal/KKKOcfaEECkqrXFOBYIa.png')
+}, container,
+{
+  number: 50,
+  gravity: 0.1,
+  randomSpacing: true,
+  minAngle: 0, maxAngle: 6.28,
+  minSize: 12, maxSize: 24,
+  minSpeed: 1, maxSpeed: 2,
+  minScaleSpeed: 0.005, maxScaleSpeed: 0.01,
+  minAlphaSpeed: 0.005, maxAlphaSpeed: 0.01,
+  minRotationSpeed: 0.05, maxRotationSpeed: 0.1
+});
+app.run(container);
+//在主 ticker 中加上 dust 的更新
+app.ticker.add(function () {
+  dust.update();
+});</code></pre>
+<p>效果如下：</p>
+<video controls="" width="240" name="media"><source src="https://os.alipayobjects.com/rmsportal/jpdIOodJtXzchAJOYtSg.mp4" type="video/mp4"></video>

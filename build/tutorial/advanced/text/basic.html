@@ -1,0 +1,11 @@
+<h1 id="简单使用">简单使用</h1>
+<p>使用 <code>Text</code> 类可以创建字体，需要传入两个参数：字符和文字样式。下面创建字符是"你好，Tiny.js！"，样式是白色、32像素：</p>
+<pre><code class=" js language- js">var txt = new Tiny.Text('你好，Tiny.js！', {
+  fontFamily: 'Arial',
+  fontSize: 32,
+  fill: 'white'
+});</code></pre>
+<p><img src="https://zos.alipayobjects.com/rmsportal/zHNspohOJUVVIOCKzxWF.jpg" alt="" /></p>
+<p>由于 <code>Text</code> 类继承自 <code>Sprite</code>，所以它拥有像 <code>x</code>，<code>y</code>，<code>width</code>，<code>height</code>，<code>alpha</code> 和 <code>rotation</code> 等属性。设置位置和尺寸就像操作精灵一样。<br />
+如果你想要在创建之后再更改文字的内容，设置 <code>text</code> 属性即可：</p>
+<pre><code class=" js language- js">txt.text = 'Text changed!';</code></pre>

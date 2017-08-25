@@ -1,0 +1,20 @@
+<h1 id="添加和移除">添加和移除</h1>
+<p>和你使用 jQuery 一样，添加一个事件用 <code>on</code>， 移除用 <code>off</code>。</p>
+<pre><code class=" js language- js">var text = new Tiny.Text('click me');
+// 设置文字可点击
+text.setEventEnabled(true);
+// 绑定点击/触事件
+text.on('pointertap', function () {
+  console.log('clicked');
+});</code></pre>
+<pre><code class=" js language- js">// 移除文字上的所有 pointertap 事件
+text.off('pointertap');</code></pre>
+<p>如果只是移除 pointertap 某个事件，可以在 off 中补上第二个回调函数：</p>
+<pre><code class=" js language- js">var handler = function(){
+  console.log('I will be remove');
+};
+text.on('pointertap', handler);
+text.on('pointertap', function () {
+  console.log('I will not be remove');
+});
+text.off('pointertap', handler);</code></pre>

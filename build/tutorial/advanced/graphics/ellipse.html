@@ -1,0 +1,8 @@
+<h1 id="椭圆">椭圆</h1>
+<p>比原生 API 多个优势，你可以直接通过 <code>drawEllipse</code> 方法来创建椭圆。</p>
+<pre><code class=" js language- js">drawEllipse(x, y, width, height);</code></pre>
+<p>x/y 位置定义的是椭圆的左上角，下面创建一个宽50像素、高20像素的黄色椭圆形：</p>
+<pre><code class=" js language- js">var ellipse = new Tiny.Graphics();
+ellipse.beginFill(0xFFFF00);
+ellipse.drawEllipse(0, 0, 50, 20);
+ellipse.endFill();</code></pre>

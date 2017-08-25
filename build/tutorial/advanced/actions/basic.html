@@ -1,0 +1,34 @@
+<h1 id="简单使用">简单使用</h1>
+<p>动画可以让游戏丰富多彩，开发也更轻松，你可以像这样创建一个动画：</p>
+<pre><code class=" js language- js">// 新建 action，时长是2000ms，旋转360度
+var action = Tiny.RotateTo(2000, {rotation: Tiny.deg2radian(360)});
+// 执行 action RepeatForever
+sprite.runAction(Tiny.RepeatForever(action));</code></pre>
+<p>运行效果如下（点击播放）：</p>
+<video controls="" width="100" loop="loop" name="media"><source src="https://os.alipayobjects.com/rmsportal/ACOmcPKmGgKnyhgUyNEI.mp4" type="video/mp4"></video>
+<p>使用 <code>MoveTo</code> 可以让精灵从当前位置移动到指定的位置，下面的代码会让精灵在 1000ms 内移动到 x=100，y=100 的位置：</p>
+<pre><code class=" js language- js">Tiny.MoveTo(1000, Tiny.point(100, 100));</code></pre>
+<h2 id="顺序执行">顺序执行</h2>
+<p>那么，如何让多个动画按顺序执行呢？使用 <code>Container</code> 类的实例化对象的 <code>runSequenceAction</code> 方法：</p>
+<pre><code class=" js language- js">var moveToAction = Tiny.MoveTo(1500, Tiny.point(100, 150));
+var rotateTo360Action = Tiny.RotateTo(2000, {rotation: Tiny.PI_2});
+sprite.runSequenceAction(moveToAction, rotateTo360Action);</code></pre>
+<p>运行上面的代码，精灵就会先向右下角移动，然后旋转360度。</p>
+<p>最后，建议你不要让精灵同时执行多个动画，这样可能会有冲突。<br />
+如果有这种需要，可以阅读"更多姿势-动画"介绍的高级用法来实现。</p>
+<blockquote>
+  <p>Tips</p>
+  <ul>
+  <li><code>Tiny.point</code> 是一个静态方法，用于快速创建一个点对象，<code>Tiny.point(100, 100)</code> 相当于 <code>{x: 100, y: 100}</code>；</li>
+  <li><code>Tiny.scale</code> 也是一个静态方法，用于快速创建一个缩放值，<code>Tiny.scale(0.5, 0.5)</code> 相当于 <code>{scaleX: 0.5, scaleY: 0.5}</code>；</li>
+  <li>如果两个入参一样，可以直接传一个，如：<code>Tiny.point(100)</code> 和 <code>Tiny.point(100, 100)</code> 一样</li>
+  </ul>
+</blockquote>
+<h2 id="手动移除">手动移除</h2>
+<p>可以使用 <code>Container</code> 类的实例化对象的 <code>removeActions</code> 来移除该对象上绑定的所有 Action，<code>removeActionsTrace</code> 来移除该对象及其子集上绑定的所有 Action。</p>
+<pre><code class=" js language- js">sprite.removeActions();</code></pre>
+<pre><code class=" js language- js">sprite.removeActionsTrace();</code></pre>
+<p>也可以使用 Action 的静态方法 <code>cleanup</code> 移除对象上的所有 Action：</p>
+<pre><code class=" js language- js">Tiny.Action.cleanup(sprite);</code></pre>
+<h2 id="自动移除">自动移除</h2>
+<p>每一个显示对象在被 <code>remove</code> 时都会自动清除其及子集的所有的 actions，比如：<code>removeChild</code>、<code>removeChildAt</code>、<code>removeChildren</code>。</p>

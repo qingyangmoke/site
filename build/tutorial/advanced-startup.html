@@ -1,0 +1,119 @@
+<h1 id="启动参数">启动参数</h1>
+<table>
+<thead>
+<tr>
+<th id="参数名" style="text-align:right;">参数名</th>
+<th id="默认值" style="text-align:center;">默认值</th>
+<th id="类型" style="text-align:left;">类型</th>
+<th id="描述" style="text-align:left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">width</td>
+<td style="text-align:center;">null</td>
+<td style="text-align:left;">Number</td>
+<td style="text-align:left;">宽度</td>
+</tr>
+<tr>
+<td style="text-align:right;">height</td>
+<td style="text-align:center;">null</td>
+<td style="text-align:left;">Number</td>
+<td style="text-align:left;">高度</td>
+</tr>
+<tr>
+<td style="text-align:right;">referWidth</td>
+<td style="text-align:center;">320</td>
+<td style="text-align:left;">Number</td>
+<td style="text-align:left;">基准参考宽度，如：320、375</td>
+</tr>
+<tr>
+<td style="text-align:right;">fixSize</td>
+<td style="text-align:center;">false</td>
+<td style="text-align:left;">Boolean</td>
+<td style="text-align:left;">是否固定尺寸为传入的宽高（适用于PC）</td>
+</tr>
+<tr>
+<td style="text-align:right;">canvasId</td>
+<td style="text-align:center;">'TinyCanvas'</td>
+<td style="text-align:left;">String</td>
+<td style="text-align:left;">canvas的DOM</td>
+</tr>
+<tr>
+<td style="text-align:right;">orientation</td>
+<td style="text-align:center;">0</td>
+<td style="text-align:left;">Number</td>
+<td style="text-align:left;">横竖屏[0: 竖屏, 1: 横屏]</td>
+</tr>
+<tr>
+<td style="text-align:right;">listenRotation</td>
+<td style="text-align:center;">true</td>
+<td style="text-align:left;">Boolean</td>
+<td style="text-align:left;">是否监听屏幕旋转</td>
+</tr>
+<tr>
+<td style="text-align:right;">dpi</td>
+<td style="text-align:center;">1</td>
+<td style="text-align:left;">Number</td>
+<td style="text-align:left;">分辨率</td>
+</tr>
+<tr>
+<td style="text-align:right;">showFPS</td>
+<td style="text-align:center;">false</td>
+<td style="text-align:left;">Boolean</td>
+<td style="text-align:left;">是否显示帧频</td>
+</tr>
+<tr>
+<td style="text-align:right;">renderType</td>
+<td style="text-align:center;">0</td>
+<td style="text-align:left;">Number</td>
+<td style="text-align:left;">渲染类型 [0: 自动识别, 1: WEBGL, 2: CANVAS]</td>
+</tr>
+<tr>
+<td style="text-align:right;">renderOptions</td>
+<td style="text-align:center;"></td>
+<td style="text-align:left;">Object</td>
+<td style="text-align:left;">渲染参数，见：Tiny.RENDER_OPTIONS</td>
+</tr>
+<tr>
+<td style="text-align:right;">autoRender</td>
+<td style="text-align:center;">1</td>
+<td style="text-align:left;">Number</td>
+<td style="text-align:left;">是否自动渲染 [0: 手动, 1: 自动]</td>
+</tr>
+</tbody>
+</table>
+<pre><code class=" js language- js">var config = {
+  showFPS: true, // 显示帧频
+  dpi: 1.5, // 分辨率设置为 1.5
+  height: 300, // 固定高度为 300
+  width: 300, // 固定宽度为 300
+  fixSize: true, // 固定尺寸为传入的宽高
+  renderType: Tiny.RENDERER_TYPE.WEBGL, // 强制使用 WebGL 渲染
+  renderOptions: { // 非特殊场景可以不用设置此参数
+    antialias: true, // 抗锯齿
+    transparent: false, // canvas 不透明
+    clearBeforeRender: true, // 每次渲染之前都清空画布
+    backgroundColor: 0x2a3145,
+    roundPixels: false,
+  },
+  autoRender: 1, // 自动渲染
+};</code></pre>
+<blockquote>
+  <p>Tips</p>
+  <ol>
+  <li><p>基准参考宽度 <code>referWidth</code> 不设置的话，默认是 320，即视觉稿给的是 640 的尺寸，如果视觉是 750，那就需要设置为 375（即：750/2）；</p></li>
+  <li><p>通过参数 <code>fixSize</code> 来固定尺寸为传入的宽高，这比较适合 PC 页面，对于全屏的移动端不用设置，Tiny.js 会做好；</p></li>
+  <li><p><code>canvasId</code> 不设置的话，会自动创建一个 ID 为 <code>TinyCanvas</code> 的 canvas；</p></li>
+  <li><p><code>autoRender</code> 的自动模式是直接进入游戏的主调度，通过 <code>Tiny.ticker.Ticker</code> 定时渲染，手动模式只渲染一次，如果再次渲染可以调用 <code>Application</code> 的实例化对象的 <code>render</code> 方法（如：<code>app.render();</code>）；</p></li>
+  <li><p><code>renderOptions.antialias</code> 抗锯齿在渲染类型为 WebGL 时有效，<code>Tiny.Graphics</code> 和 <code>Tiny.Text</code> 效果较明显，另外抗锯齿并不一定在所有平台都有效；</p></li>
+  <li><p><code>renderOptions.transparent</code> 透明设置为 true 后，<code>renderOptions.backgroundColor</code> 无效；</p></li>
+  <li><p><code>renderOptions.clearBeforeRender</code> 在渲染类型为 WebGL 时，如果要设置为 false，那一定要设置 <code>renderOptions.preserveDrawingBuffer: true</code> 才有效；</p></li>
+  <li><p><code>renderOptions.roundPixels</code> 设置为 true 时可以提升渲染性能，但是图像进行放大后会取消图像像素点的插值运算，转而出现像素块；<a href="http://www.cambridgeincolour.com/tutorials/image-interpolation.htm">了解像素插值？</a></p></li>
+  <li><p><code>dpi</code> 对比图：</p>
+  <p><img src="https://zos.alipayobjects.com/rmsportal/kTUWZsQMtdLqGlIBnbsy.jpg" alt="" /></p></li>
+  </ol>
+</blockquote>
+<p>如果不配置 <code>renderType</code>，Tiny.js 默认使用 WebGL 渲染，因为性能、速度都非常好，当然，你也可以配置 <code>renderType</code> 来决定使用哪种渲染类型</p>
+<p>注意：iOS 9.x 的 WKWebViews 在使用 WebGL 时，会高概率的出现 crash（<a href="https://forums.developer.apple.com/thread/30896">了解更多？</a>）。规避的方案可以把 <code>WebGLRenderingContext</code> 置为 <code>null</code>，不用 WebGL。</p>
+<pre><code class=" js language- js">window.WebGLRenderingContext = null;</code></pre>

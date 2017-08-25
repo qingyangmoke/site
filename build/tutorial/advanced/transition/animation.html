@@ -1,0 +1,85 @@
+<h1 id="转场动画">转场动画</h1>
+<p>PPT 有很多很 low 的切换动画，Tiny.js 也提供了一些，望您不嫌弃。</p>
+<table>
+<thead>
+<tr>
+<th id="转场名" style="text-align:center;">转场名</th>
+<th id="描述" style="text-align:left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">FadeColor</td>
+<td style="text-align:left;">颜色过渡</td>
+</tr>
+<tr>
+<td style="text-align:center;">FadeWhite</td>
+<td style="text-align:left;">白色过渡</td>
+</tr>
+<tr>
+<td style="text-align:center;">ProgressH</td>
+<td style="text-align:left;">横向进度</td>
+</tr>
+<tr>
+<td style="text-align:center;">ProgressV</td>
+<td style="text-align:left;">纵向进度</td>
+</tr>
+<tr>
+<td style="text-align:center;">ProgressInOut</td>
+<td style="text-align:left;">内=&gt;外扩散</td>
+</tr>
+<tr>
+<td style="text-align:center;">ProgressOutIn</td>
+<td style="text-align:left;">外=&gt;内扩散</td>
+</tr>
+<tr>
+<td style="text-align:center;">ProgressRadialCW</td>
+<td style="text-align:left;">顺时针射线</td>
+</tr>
+<tr>
+<td style="text-align:center;">ProgressRadialCCW</td>
+<td style="text-align:left;">逆时针射线</td>
+</tr>
+<tr>
+<td style="text-align:center;">MoveInL</td>
+<td style="text-align:left;">左侧移入</td>
+</tr>
+<tr>
+<td style="text-align:center;">MoveInR</td>
+<td style="text-align:left;">右侧移入</td>
+</tr>
+<tr>
+<td style="text-align:center;">MoveInT</td>
+<td style="text-align:left;">头部移入</td>
+</tr>
+<tr>
+<td style="text-align:center;">MoveInB</td>
+<td style="text-align:left;">底部移入</td>
+</tr>
+<tr>
+<td style="text-align:center;">SlideInL</td>
+<td style="text-align:left;">左=&gt;右滑动</td>
+</tr>
+<tr>
+<td style="text-align:center;">SlideInR</td>
+<td style="text-align:left;">右=&gt;左滑动</td>
+</tr>
+<tr>
+<td style="text-align:center;">SlideInT</td>
+<td style="text-align:left;">头=&gt;底滑动</td>
+</tr>
+<tr>
+<td style="text-align:center;">SlideInB</td>
+<td style="text-align:left;">底=&gt;头滑动</td>
+</tr>
+</tbody>
+</table>
+<p>你可能发现这些很 low 的转场动画不能满足我炫酷的需求？给 <code>Tiny.Transition</code> 注册这个炫酷的转场：</p>
+<pre><code class=" js language- js">// 注册一个叫 myTransName 的转场
+Tiny.Transition.prototype.myTransName = function(){
+ console.log('请叫我炫酷！', arguments);
+}
+// 实例化，转场时长是 500
+var trans = new Tiny.Transition(scene1, scene2, 500);
+trans['myTransName']('Hello', 'Tiny.js');
+//=&gt; 请叫我炫酷！ (2) ["Hello", "Tiny.js", callee: function, ...]</code></pre>

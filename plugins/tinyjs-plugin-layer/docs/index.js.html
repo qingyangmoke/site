@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>index.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Layer.html">Layer</a></li></ul><h3>Externals</h3><ul><li><a href="external-Tiny.html">Tiny</a></li></ul><h3>Global</h3><ul><li><a href="global.html#setHitArea">setHitArea</a></li><li><a href="global.html#setScroll">setScroll</a></li><li><a href="global.html#setStyle">setStyle</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">index.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file        集成 Scroller 的显示类
+ * @author      fangjun.yfj
+ */
+
+/**
+ * Tiny.js
+ * @external Tiny
+ * @see {@link http://tinyjs.net/}
+ */
+import Scroller from 'tinyjs-plugin-scroller';
+
+/**
+ * 集成 Scroller 的显示类
+ *
+ * @class Layer
+ * @extends Tiny.Container
+ */
+class Layer extends Tiny.Container {
+  /**
+   *
+   */
+  constructor() {
+    super();
+
+    this._list = [];
+    /**
+     * @property _style
+     * @type {Object}
+     * @default {padding: 10, font: "14px Arial", fill: '#ffffff'}
+     * @private
+     */
+    this._style = {
+      padding: 10,
+      fontSize: 14,
+    };
+
+    /**
+     * @property scrollWidth
+     * @default 100
+     * @type {number}
+     */
+    this.scrollHeight = 100;
+
+    /**
+     * @property scrollWidth
+     * @default 100
+     * @type {number}
+     */
+    this.scrollWidth = 100;
+
+    this.container = new Tiny.Container();
+    this.container.interactive = true;
+    this.g = new Tiny.Graphics();
+    this.container.mask = this.g;
+
+    this.init();
+  }
+
+  init() {
+    const self = this;
+    this.scroller = new Scroller(function (left, top, zoom) {
+      self.container.position.y = -top;
+    }, {
+      scrollingY: true,
+    });
+    this._eventBind(this.scroller);
+    this.addChild(this.container);
+  }
+
+  /**
+   * 设置容器事件区域
+   *
+   * @method setHitArea
+   * @param {Rectangle} rect
+   */
+  setHitArea(rect) {
+    if (rect instanceof Tiny.Rectangle) {
+      this.container.hitArea = rect;
+    }
+  }
+
+  setList(list) {
+    this._list = list;
+    this.refreshList();
+  }
+
+  refreshList() {
+    const self = this;
+    this.container.removeChildren();
+
+    this._list.forEach(function (item, i) {
+      const tb = new Tiny.Text(item.title, self._style);
+      tb.anchor.set(0.5);
+      tb.position.set(self.scrollWidth / 2, tb.height * (i + 1));
+
+      tb.interactive = true;
+      tb.touchstart = tb.mousedown = function (data) {
+        self.timeStamp = data.data.originalEvent.timeStamp;
+        this.scale.set(1.2, 1.2);
+      };
+      tb.mouseup = tb.mouseupoutside = tb.touchend = tb.touchendoutside = function (data) {
+        this.scale.set(1, 1);
+      };
+      tb.tap = tb.click = function (data) {
+        if (data.data.originalEvent.timeStamp - self.timeStamp > 150) {
+          return;
+        }
+
+        item.action(data);
+      };
+      self.container.addChildAt(tb, i);
+    });
+
+    this.scroller.setDimensions(this.scrollWidth, this.scrollHeight, self.container.width, self.container.height);
+  }
+
+  /**
+   * 设置列表项的样式
+   *
+   * @method setStyle
+   * @param {Object} style
+   */
+  setStyle(style) {
+    this._style = style;
+    this.refreshList();
+  }
+
+  _eventBind(scroller) {
+    const self = this;
+    const object = this.container;
+    object.touchstart = object.mousedown = function (data) {
+      const e = data.data.originalEvent;
+      scroller.doTouchStart(e.touches, e.timeStamp);
+    };
+
+    object.mousemove = object.touchmove = function (data) {
+      const e = data.data.originalEvent;
+      if (!Tiny.rectContainsPoint(new Tiny.Rectangle(0, 0, self.scrollWidth, self.scrollHeight), data.data.global)) return;
+      scroller.doTouchMove(e.touches, e.timeStamp, e.scale);
+    };
+
+    object.mouseup = object.mouseupoutside = object.touchend = object.touchendoutside = function (data) {
+      const e = data.data.originalEvent;
+      scroller.doTouchEnd(e.timeStamp);
+    };
+  }
+
+  /**
+   *
+   * @private
+   */
+  _setMask() {
+    this.removeChild(this.g);
+    this.g.beginFill(0xFFFFFF);
+    this.g.drawRect(0, 0, this.scrollWidth, this.scrollHeight);
+    this.g.endFill();
+    this.addChild(this.g);
+  }
+
+  /**
+   * 设置 ListLayer 的尺寸
+   *
+   * @method setScroll
+   * @param w
+   * @param h
+   */
+  setScroll(w, h) {
+    this.scrollWidth = w;
+    this.scrollHeight = h;
+    this._setMask();
+  }
+}
+
+module.exports = Layer;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Aug 25 2017 12:42:36 GMT+0800 (CST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

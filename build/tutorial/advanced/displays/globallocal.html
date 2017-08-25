@@ -1,0 +1,37 @@
+<h1 id="相对位置">相对位置</h1>
+<p>当你添加一个精灵到一个 <code>Container</code>，它的 <code>x</code>、<code>y</code> 位置是相对于这个组的左上角，这是精灵的 local position。<br />
+从下图中，你认为"支地鼠"的位置是多少？</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/JgFDhdTWWNyVMjPmVWEu.png@240w" alt="" /></p>
+<pre><code class=" js language- js">console.log(aliMole.getPositionX());
+//=&gt; 0</code></pre>
+<p>0？是的！因为"支地鼠"的 <code>x</code> 值是相对于组 <code>moles</code> 的左上角，0 就是精灵的 local position。</p>
+<p>如果我们想要获取精灵相对于画布的全局位置（global position）呢？就是相对于画布的左上角的位置。<br />
+你可以使用 <code>toGlobal</code> 方法：</p>
+<pre><code class=" js language- js">parentSprite.toGlobal(childSprite.position);</code></pre>
+<p>这就意味这你可以找到 moles 组里的 aliMole 的全局位置：</p>
+<pre><code class=" js language- js">console.log(moles.toGlobal(aliMole.getPosition()));
+//=&gt; {x: 40, y: 165}</code></pre>
+<p>如果我不知道精灵的父容器是什么，怎么办？每一个继承于 <code>DisplayObject</code> 的显示类都有 <code>parent</code> 属性，这会返回它的父对象，上面的代码中 <code>aliMole</code> 的 parent 就是 <code>moles</code>，所以，你获取 <code>aliMole</code> 全局位置的姿势就可以是这样的：</p>
+<pre><code class=" js language- js">aliMole.parent.toGlobal(aliMole.getPosition());</code></pre>
+<p>不过，你可以使用 <code>getGlobalPosition</code> 快速得到全局位置，这也是推荐的姿势：</p>
+<pre><code class=" js language- js">// 支地鼠的全局位置
+console.log(aliMole.getGlobalPosition());
+//=&gt; {x: 40, y: 165}
+
+// 堵车鼠的全局位置
+console.log(dcMole.getGlobalPosition());
+//=&gt; {x: 80, y: 205}
+
+// 排队鼠的全局位置
+console.log(pdMole.getGlobalPosition());
+//=&gt; {x: 120, y: 245}</code></pre>
+<blockquote>
+  <p>Tips</p>
+  <ul>
+  <li>获取全局位置后，对于检测碰撞会有很大的帮助。</li>
+  </ul>
+</blockquote>
+<p>你还可以使用 <code>toLocal</code> 方法来得到两个精灵之间的相对位置：</p>
+<pre><code class=" js language- js">console.log(aliMole.toLocal(aliMole.position, dcMole));
+//=&gt; {x: 40, y: 40}</code></pre>
+<p>从上面的代码片段运行的结果可以看出："支地鼠"和"堵车鼠"之间的偏移量是 {40, 40}。</p>

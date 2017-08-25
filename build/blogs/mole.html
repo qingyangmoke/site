@@ -1,0 +1,183 @@
+<h1 id="地鼠和它们的地洞">地鼠和它们的地洞</h1>
+<blockquote>
+  <p>打地鼠这类小游戏大家应该都多多少少玩过，各种版本数不胜数，今天，就来用 Tiny.js 给大家讲一讲地鼠是如何打洞的。</p>
+</blockquote>
+<p>先预览一下效果：</p>
+<video controls="" width="240" name="media"><source src="http://gw.alipayobjects.com/os/rmsportal/ewLodRCQsIIiGaVzQLoX.mp4" type="video/mp4"></video>
+<p>这个小游戏实现起来可简单，也可不简单，既能简单又能优雅的实现，就得 Tiny.js 上场了。<br />
+仔细点的人会发现，地洞是不规则的，而且地鼠和地洞之间也毫无违和感，普通方式可不好实现。<br />
+现在，就让我们正式领略一下！</p>
+<h3 id="1、引入-tinyjs">1、引入 Tiny.js</h3>
+<p>引入的方式很简单，在 html 文件中插入以下 script：</p>
+<pre><code class=" html language- html">&lt;script src="https://a.alipayobjects.com/g/tiny/tiny/1.0.2/tiny.js"&gt;&lt;/script&gt;</code></pre>
+<h3 id="2、新建-application">2、新建 Application</h3>
+<p>首先初始化一个 App，再创建一个 layer，运行之：</p>
+<pre><code class=" js language- js">Tiny.app = new Tiny.Application({
+  showFPS: true,
+  fixSize: true, // 虽然游戏是适配移动端的，但是我们还是希望演示时PC也是友好的，所以固定尺寸为传入的宽高
+  height: window.innerHeight,
+  width: window.innerWidth,
+  dpi: 2, // 咱们的演示是高清的😊
+  renderOptions: {
+    backgroundColor: 0x7ac9e5
+  }
+});
+// 定义一个 layer，我们把它作为主场景
+var layer = new Tiny.Container();
+Tiny.app.run(layer);</code></pre>
+<p>看看屏幕是不是变成了天蓝色，这只是开始，接下来，将地洞添加到场景中。</p>
+<h3 id="3、使用-sprite">3、使用 Sprite</h3>
+<p>创建 Sprite 的方法有多个，我们用最简单的：</p>
+<pre><code class=" js language- js">var hole = Tiny.Sprite.fromImage('https://a.alipayobjects.com/g/H5Promo/618-payment-promotion/1.0.4/res/images/hole.png');
+// 设置 hole 的 Y 方向位置
+hole.setPositionY(184 * 2);
+// 将 hole 加到场景中
+layer.addChild(hole);</code></pre>
+<p>效果如下：</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/PpQbyZZfyKqmljZzbcJd.png@240w.src" alt="" /></p>
+<h3 id="4、使用-graphics">4、使用 Graphics</h3>
+<p>不规则的地洞：</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/PlXWukoCcUgrEQZoXRWL.png" alt="" /></p>
+<p>说到不规则，一定会想到切个不规则的 png 图片，但是这不够灵活，我们希望它们是数字驱动。</p>
+<p>用<code>Tiny.Graphics</code>画一个吻合地洞的图形：</p>
+<pre><code class=" js language- js">var g = new Tiny.Graphics();
+g.lineStyle(0);
+g.beginFill(0xFF0000);
+g.moveTo(0, 63);
+g.lineTo(64, 130);
+g.lineTo(80, 166);
+g.lineTo(132, 180);
+g.lineTo(164, 158);
+g.lineTo(184, 180);
+g.lineTo(180, 168);
+g.lineTo(230, 158);
+g.lineTo(222, 138);
+g.lineTo(266, 50);
+g.quadraticCurveTo(133, -50, 0, 63);
+g.endFill();</code></pre>
+<p>效果如下图：</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/xVrDMTXBYfaDcHDFfuFr.png" alt="" /></p>
+<p>合起来看看：</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/KndaAzWnXPPHASOhdntF.png@240w.src" alt="" /></p>
+<p>9个洞的位置是用数据对象记录的：</p>
+<pre><code class=" js language- js">var MASK_DATA = [
+  {
+    x: 22,
+    y: 148,
+    s: 0.5 * 0.78
+  },
+  {
+    x: 102,
+    y: 148,
+    s: 0.5 * 0.78
+  },
+  {
+    x: 180,
+    y: 148,
+    s: 0.5 * 0.78
+  },
+  {
+    x: 0,
+    y: 221,
+    s: 0.5 * 0.925
+  },
+  {
+    x: 90,
+    y: 221,
+    s: 0.5 * 0.925
+  },
+  {
+    x: 178,
+    y: 221,
+    s: 0.5 * 0.925
+  },
+  {
+    x: -13,
+    y: 305,
+    s: 0.5
+  },
+  {
+    x: 84,
+    y: 305,
+    s: 0.5
+  },
+  {
+    x: 180,
+    y: 305,
+    s: 0.5
+  }
+];</code></pre>
+<p>使用的过程如下：</p>
+<pre><code class=" js language- js">// 定义一个遮罩的容器，用它来承载9个遮罩元素
+var maskContainer = new Tiny.Container();
+// 将遮罩容器加到主场景中
+layer.addChild(maskContainer);
+
+MASK_DATA.forEach(function (item) {
+  // 使用数据对象创建遮罩单例，并添加到遮罩容器中
+  maskContainer.addChild(generateMask(Tiny.point(item.x, item.y), item.s));
+});</code></pre>
+<blockquote>
+  <p>说明：这里的<code>generateMask</code>实际上是对上面画不规则图形的一个封装：</p>
+<pre><code class=" js language- js">function generateMask(p, scale) {
+  var g = new Tiny.Graphics();
+  // 此处省略部分代码
+  g.setScale(scale * 2);
+  g.setPosition(p.x * 2, p.y * 2);
+  return g;
+}</code></pre>
+</blockquote>
+<h3 id="5、使用遮罩">5、使用遮罩</h3>
+<p>设置 Sprite 的<code>mask</code>值为一个<code>Graphics</code>就可以为显示对象做上遮罩了，遮罩的面积就是图形的面积</p>
+<p>这部分的代码如下：</p>
+<pre><code class=" js language- js">// 定义一个盛放地鼠们的容器
+var moleContainer = new Tiny.Container();
+// 将地鼠容器加到主场景中
+layer.addChild(moleContainer);
+
+// 定义地鼠的类型，注意用于加载对应的图片
+var moles = ['ali', 'dc', 'pd', 'ty'];
+var indexs = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+indexs.forEach(function (i) {
+  // 随机取一个类型
+  var type = Tiny.randomFromArray(moles);
+  var mole = Tiny.Sprite.fromImage('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/moles/' + type + '_mole.png');
+  // 此处省略部分影响阅读的代码
+  // 设置 mole 的遮罩为当前位置的不规则图形
+  mole.mask = maskContainer.getChildAt(i);
+  // 将地鼠添加到地鼠容器中
+  moleContainer.addChild(mole);
+});</code></pre>
+<p>然后，一起看看各种情况时的效果：</p>
+<table>
+<thead>
+<tr>
+<th id="不设置地鼠的_mask_属性" style="text-align:center;">不设置地鼠的 mask 属性</th>
+<th id="透视效果" style="text-align:center;">透视效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;"><img src="https://gw.alipayobjects.com/zos/rmsportal/KnzlOwzjImOMnNrvjEMV.png" width=240/></td>
+<td style="text-align:center;"><img src="https://gw.alipayobjects.com/zos/rmsportal/hXacrMKXdasGZXiJDRFM.png" width=240/></td>
+</tr>
+</tbody>
+</table>
+<h3 id="6、使用-action">6、使用 Action</h3>
+<p>这时，我们应该希望地鼠可以钻出来，钻进去，那就要用到<code>Tiny.Action</code>了，我们用第一个地鼠实施一下：</p>
+<pre><code class=" js language- js">// 从地鼠容器里取出第一个
+var m = moleContainer.getChildAt(0);
+// 定义一个 MoveTo 动作，持续时间为 100ms，移动到的位置是当前地鼠向上 110 像素
+var upAction = Tiny.MoveTo(100, Tiny.point(m.x, m.y - 110));
+// 最后，使用显示对象上的方法 runAction 让地鼠执行 upAction
+m.runAction(upAction);</code></pre>
+<p>然后，第一个地鼠就钻出来了：</p>
+<p><img src="https://gw.alipayobjects.com/zos/rmsportal/MaFTXkkptSjjgTALGTlg.png@240w.src" alt="" /></p>
+<p>钻回去其实也一样，只要让移动到的位置向下 110 像素即可：</p>
+<pre><code class=" js language- js">var downAction = Tiny.MoveTo(100, Tiny.point(m.x, m.y + 110));</code></pre>
+<h4 id="注意：本文为演示效果，所有资源都是通过静态方法异步加载，为保证游戏体验，建议你在正式项目中，使用tinyloader提前加载游戏资源。">注意：本文为演示效果，所有资源都是通过静态方法异步加载，为保证游戏体验，建议你在正式项目中，使用<code>Tiny.Loader</code>提前加载游戏资源。</h4>
+<hr />
+<blockquote>
+  <p>本文演示代码地址：<a href="https://github.com/yiiqii/blog/tree/master/code/tiny/mole.html">https://github.com/yiiqii/blog/tree/master/code/tiny/mole.html</a><br />
+  源码地址：<a href="https://github.com/yiiqii/mole">https://github.com/yiiqii/mole</a></p>
+</blockquote>

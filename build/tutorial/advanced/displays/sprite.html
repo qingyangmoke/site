@@ -1,0 +1,153 @@
+<h1 id="精灵">精灵</h1>
+<p>当我们的舞台有了场景，但是，没有显示出什么？<br />
+这时，我们可以添加一些精灵（<code>Sprite</code>），你可以控制它们的位置、大小，以及其他很有用的属性来做出一些创造性的交互和动画图形。学会制作和操作 <code>Sprite</code> 是非常重要的。如果你知道如何创建精灵、添加它们到场景中，这只是创作游戏的入门。</p>
+<p>Tiny.js 有一个创建精灵的万能类 =&gt; <code>Sprite</code>，有三种主要的方式来创建它们：</p>
+<ul>
+<li>使用一张单独的图片文件；</li>
+<li>使用 <code>tileset</code> 中的子图片；</li>
+<li>使用纹理集（<code>texture atlas</code>）：定义了图片大小、位置的 JSON 文件</li>
+</ul>
+<h2 id="使用-tileset">使用 tileset</h2>
+<p>你已经知道如何通过一张图片来创建精灵，但是，作为游戏的设计者，一般会使用雪碧图（或称 <code>tileset</code>）来聚合小图片。下面举一个简单的例子来阐述 tileset 的使用姿势。</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/gkOPpvvLDjYGZzqJYZKD.png@320w.png" alt="" /></p>
+<p>这个 tileset 的尺寸是 492*486 像素，你可以使用这里的任意一个地鼠，只需要定义一个和要提取的地鼠尺寸一致的矩形区域。下面我们来提取被砸中的"支地鼠"（左起第二个）。</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/mMZeAaWxcxYcVMqXsqtp.jpg@320w" alt="" /></p>
+<p>首先，使用 <code>Tiny.Loader</code> 加载这张 tileset 图片；在加载成功后，通过 <code>Tiny.TextureCache</code> 取到纹理实例，再使用 <code>Tiny.Rectangle</code> 初始化一个矩形，矩形位置、尺寸就是"支地鼠"在雪碧图中的位置、尺寸；然后，将纹理实例的 <code>frame</code> 属性设置为这个矩形；最后，使用纹理实例通过 <code>Tiny.Sprite</code> 创建精灵显示出来。代码如下：</p>
+<pre><code class=" js language- js">var imgUrl = 'https://zos.alipayobjects.com/rmsportal/gkOPpvvLDjYGZzqJYZKD.png';
+Tiny.Loader.add(imgUrl).load(function() {
+  var antTexture = Tiny.TextureCache[imgUrl];
+  var rect = new Tiny.Rectangle(166, 2, 160, 158);
+  antTexture.frame = rect;
+  var antSprite = new Tiny.Sprite(antTexture);
+  app.run(antSprite);
+});</code></pre>
+<p>那么，这是如何工作的？</p>
+<p><code>Tiny.Rectangle</code> 是用来创建矩形，有四个入参，前两个定义了矩形的 <code>x</code> 和 <code>y</code> 的位置值，后两个参数定义了矩形的 <code>width</code> 和 <code>height</code>。下面是定义一个 <code>Rectangle</code> 对象的姿势：</p>
+<pre><code class=" js language- js">var rect = new Tiny.Rectangle(x, y, width, height);</code></pre>
+<p>一个矩形对象实际上就是一个数据媒介，在这里，它定义着 tileset 上子图的位置和区域，<code>Texture</code> 类的 <code>frame</code> 属性的类型就是任何 <code>Rectangle</code> 对象，<code>frame</code> 通过 <code>Rectangle</code> 的区域裁剪出所需的纹理。</p>
+<pre><code class=" js language- js">var rect = new Tiny.Rectangle(166, 2, 160, 158);
+antTexture.frame = rect;</code></pre>
+<p>你就可以使用裁剪出来的纹理，通过 <code>Sprite</code> 类直接构建出精灵来：</p>
+<pre><code class=" js language- js">var antSprite = new Tiny.Sprite(antTexture);</code></pre>
+<p>实际场景中，我们经常会用到 <code>tileset</code>，通过这种方式创建精灵效率还是低下。<br />
+接下来，我们再看看第三种高级姿势。</p>
+<h2 id="使用纹理集">使用纹理集</h2>
+<p>如果你正在开发一款稍复杂的游戏，你一定希望能够快速、有效的通过 tileset 来创建精灵，纹理集在这里就发挥作用了。</p>
+<p>Tiny 提供纹理集生成工具，配置好 <code>tiny-app.config.js</code>后，只需使用工具 <a href="#/tools/tiny-cli">tiny-cli</a> 在工程目录下执行 <code>tiny resource</code> 即可。<br />
+子图集目录：</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/nvcrMifbyqRUSbJBRNHL.png" alt="" /></p>
+<p><code>tiny-app.config.js</code> 的配置：</p>
+<pre><code class=" js language- js">module.exports = {
+  ...
+
+  // 生成的资源配置文件
+  resourceName: 'Resource.js',
+
+  tileset: [{
+    // 合并到 tileset 中的子图目录
+    fold: 'res/images/mole',
+    name: 'mole_tile'
+  }]
+};</code></pre>
+<p>在工程目录下执行 <code>tiny resource</code> 后生成两个文件：<code>mole_tile.json</code> 和 <code>mole_tile.png</code>，json 文件内容如下：</p>
+<pre><code class=" json language- json">{
+    "meta": {
+        "image": "mole_tile.png",
+        "size": {"w":492,"h":486},
+        "scale": "1"
+    },
+    "frames": {
+        "ali_mole.png": // frame id
+        {
+            "frame": {"x":2,"y":2,"w":160,"h":158},
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {"x":0,"y":0,"w":160,"h":158},
+            "sourceSize": {"w":160,"h":158}
+        },
+        ...
+    }
+}</code></pre>
+<p>同时，生成后的文件会自动添加到资源配置文件（即 <code>src/Resource.js</code>）的 <code>window.RESOURCES</code> 对象中：</p>
+<pre><code class=" js language- js">var RESOURCES = {
+  ...
+  // mole,
+  "s_mole_tile_json": "res/images/mole_tile.json",
+  "s_mole_tile_png": "res/images/mole_tile.png",
+  ...
+};</code></pre>
+<p>看完上面的介绍，我们了解了如何创建一个纹理集，现在，我们看看如何使用。<br />
+既然是资源，那就少不了 <code>Tiny.Loader</code>。加载器会自动识别 json 文件，根据 json 里描述的属性创建出纹理，使用的时候直接查询纹理缓存 <code>Tiny.TextureCache['..']</code>，唯一标识就是 frame id。</p>
+<pre><code class=" js language- js">Tiny.Loader.add('https://gw.alipayobjects.com/as/g/tiny/resources/1.0.0/images/tiles/mole_tile.json').load(function() {
+  var aliMoleHitTexture = Tiny.TextureCache['ali_mole_hit.png'];
+  var dcMoleTexture = Tiny.TextureCache['dc_mole.png'];
+  var aliMoleHitSprite = new Tiny.Sprite(aliMoleHitTexture);
+  var dcMoleSprite = new Tiny.Sprite(dcMoleTexture);
+  var container = new Tiny.Container();
+
+  container.addChild(aliMoleHitSprite);
+  container.addChild(dcMoleSprite);
+  dcMoleSprite.setPositionX(150);
+  container.setPivot(container.width / 2, container.height / 2);
+  container.setPosition(Tiny.WIN_SIZE.width / 2, 100);
+  app.run(container);
+});</code></pre>
+<p><img src="https://zos.alipayobjects.com/rmsportal/lbVKeGpogywYGoQNRjJq.jpg" alt="" /></p>
+<blockquote>
+  <p>Tips</p>
+  <ul>
+  <li>纹理集是一个 JSON 数据文件，它包含 tileset 图片中各个子图的名称、位置和大小等属性；</li>
+  <li>使用纹理集，你不用关心任何顺序问题，同时，你的代码里也不会出现图片大小、尺寸的硬编码了；</li>
+  <li>如果你需要更改某个图片，只需要替换那个子图，然后通过 <code>tiny resource</code> 命令重新生成，不用改代码；</li>
+  </ul>
+</blockquote>
+<h2 id="精灵集">精灵集</h2>
+<p>更多的场景我们希望操作一组精灵集，就在刚刚，我们用 <code>Tiny.Container</code> 包裹了两个地鼠，并对它们整体设置 <code>pivot</code> 和 <code>position</code>。<br />
+现在，我们再来分解操作三个地鼠，创建后再分别设置它们的位置。</p>
+<pre><code class=" js language- js">// 支地鼠
+var aliMole = new Tiny.Sprite(Tiny.TextureCache['ali_mole.png']);
+aliMole.setPosition(40);
+
+// 堵车鼠
+var dcMole = new Tiny.Sprite(Tiny.TextureCache['dc_mole.png']);
+dcMole.setPosition(80);
+
+// 排队鼠
+var pdMole = new Tiny.Sprite(Tiny.TextureCache['pd_mole.png']);
+pdMole.setPosition(120);</code></pre>
+<p>接着，创建 <code>moles</code> 容器来组合它们到一起：</p>
+<pre><code class=" js language- js">var moles = new Tiny.Container();</code></pre>
+<p>通过 <code>addChild</code> 方法把三个地鼠添加进去：</p>
+<pre><code class=" js language- js">moles.addChild(aliMole);
+moles.addChild(dcMole);
+moles.addChild(pdMole);</code></pre>
+<p>最后，把这个组合添加到舞台上：</p>
+<pre><code class=" js language- js">app.run(moles);</code></pre>
+<p><img src="https://zos.alipayobjects.com/rmsportal/YSYTYwMrgLhgQmIRjUKe.jpg" alt="" /></p>
+<p>你只能看到三只地鼠，但是看不到地鼠集合 moles 任何的表现，因为它只是一个容器。</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/zPTzpfYmiEMCuxtpzHNg.jpg@320w" alt="" /></p>
+<p>现在，你可以操作这个集合，就像操作一个对象，你可以认为 <code>Tiny.Container</code> 就是一个没有独立纹理的特殊精灵，你可以直接使用它的所有属性和方法。</p>
+<p>例如，我想要获取 <code>moles</code> 下的所有子集，调用它数组格式的属性 <code>children</code> 即可：</p>
+<pre><code class=" js language- js">console.log(moles.children);
+//(3) [Sprite, Sprite, Sprite]
+//0: Sprite
+//1: Sprite
+//2: Sprite
+//length: 3</code></pre>
+<p>这就告诉了我们 <code>moles</code> 有三个子精灵。</p>
+<p>我们也可以更改 <code>x</code> 和 <code>y</code> 值，<code>alpha</code>，<code>scale</code> 等等所有的属性，更改父集的属性，它的子集也会相对更改。比如：重设了父集的位置 <code>x</code>、<code>y</code>，那么它所有的子集也会相对父集左上角的位置进行位移，我们设置 <code>moles</code> 的 <code>x</code> 和 <code>y</code> 都为 -40 时会是什么样？</p>
+<pre><code class=" js language- js">moles.setPosition(-40);</code></pre>
+<p>整个组都上移了 40 像素，左移了 40 像素。</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/hqIacojRXPXMMAdZfqrj.jpg" alt="" /></p>
+<p><code>moles</code> 组同样也有自己的尺寸，这取决于它所包含的子集的集合区域，你可以使用 <code>width</code> 和 <code>height</code> 来获取：</p>
+<pre><code class=" js language- js">console.log(moles.width);
+//240
+
+console.log(moles.height);
+//238</code></pre>
+<p>如果你更改了 <code>moles</code> 的宽高？</p>
+<pre><code class=" js language- js">moles.width = 360;
+moles.height = 360;</code></pre>
+<p>所有的地鼠都跟随变化缩放了。</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/kctnqpkiMBriiokXDxIU.jpg" alt="" /></p>
+<p>你可以让一个 <code>Container</code> 包含很多的 <code>Container</code>，不论有多少层。但是，一个显示类（<code>DisplayObject</code>）仅仅只能拥有一个父集，如果你给一个父集 <code>addChild</code> 一个已有父集的显示对象，那么这个显示对象会自动从原来的父集移除掉。</p>

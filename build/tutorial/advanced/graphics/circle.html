@@ -1,0 +1,8 @@
+<h1 id="圆">圆</h1>
+<p>使用 <code>drawCircle</code> 方法来绘制圆，它的三个参数分别是 <code>x</code>，<code>y</code>，和 <code>radius</code>。</p>
+<pre><code class=" js language- js">drawCircle(x, y, radius);</code></pre>
+<p>和矩形及精灵不同的是，圆的 <code>x</code>、<code>y</code> 的位置是它的中心点，下面我们创建一个半径是32像素的紫色圆：</p>
+<pre><code class=" js language- js">var circle = new Tiny.Graphics();
+circle.beginFill(0x9966FF);
+circle.drawCircle(0, 0, 32);
+circle.endFill();</code></pre>

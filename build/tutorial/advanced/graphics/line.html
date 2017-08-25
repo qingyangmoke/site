@@ -1,0 +1,6 @@
+<h1 id="直线">直线</h1>
+<p>使用 <code>lineStyle</code> 方法可以定义一个直线，使用 <code>moveTo</code> 和 <code>lineTo</code> 方法来绘制直线的起始点，和 Canvas 原生 API 一致。下面创建一个4像素宽的白线：</p>
+<pre><code class=" js language- js">var line = new Tiny.Graphics();
+line.lineStyle(4, 0xFFFFFF, 1);
+line.moveTo(0, 0);
+line.lineTo(80, 50);</code></pre>

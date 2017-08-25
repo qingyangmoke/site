@@ -1,0 +1,46 @@
+<h1 id="使用插值">使用插值</h1>
+<p>使用 <code>setInterpolation</code> 方法可以设置动画的贝塞尔插值，用图形直观的解释（图中右上角的点就是插值点）：</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/NHofuDgQURNsmcSbGuXT.png" alt="" /></p>
+<p>tween.js 提供三种常用插值：<code>Linear</code>、<code>Bezier</code>、<code>CatmullRom</code>，当然，你可以使用自己的插值算法，绑定到 <code>Tiny.TWEEN.Interpolation</code> 即可。<br />
+现在我们写一个 cos 的插值算法：</p>
+<pre><code class=" js language- js">var cosineFn = function(p0, p1, t) {
+  var k = (1 - Math.cos(t * Math.PI)) / 2;
+  return (p1 - p0) * k + p0;
+};
+Tiny.TWEEN.Interpolation.Cosine = function(v, k) {
+  var m = v.length - 1;
+  var f = m * k;
+  var i = Math.floor(f);
+  return cosineFn(v[i], v[i + 1 &gt; m ? m : i + 1], f - i);
+};</code></pre>
+<p>然后，使用它：</p>
+<pre><code class=" js language- js">var action = Tiny.MoveTo(3000, {
+  x: [260, 0, 80],
+  y: [400]
+});
+action.setInterpolation(Tiny.TWEEN.Interpolation.CatmullRom);</code></pre>
+<p>我们再把这个插值和自带的三个进行一下对比，它们效果和运动轨迹如下：</p>
+<table>
+  <thead>
+    <tr>
+      <th>Linear</th>
+      <th>Bezier</th>
+      <th>CatmullRom</th>
+      <th>Cosine</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><video controls="" width="240" name="media"><source src="https://os.alipayobjects.com/rmsportal/NjYCgXCKzbEoPGjIQyQF.mp4" type="video/mp4"></video></td>
+      <td><video controls="" width="240" name="media"><source src="https://os.alipayobjects.com/rmsportal/cdGJrBPcTCZzoWGOKjmy.mp4" type="video/mp4"></video></td>
+      <td><video controls="" width="240" name="media"><source src="https://os.alipayobjects.com/rmsportal/drzEnlCbBmaKIWKhtsrU.mp4" type="video/mp4"></video></td>
+      <td><video controls="" width="240" name="media"><source src="https://os.alipayobjects.com/rmsportal/vAEtZComMUwqDfqyyYRm.mp4" type="video/mp4"></video></td>
+    </tr>
+    <tr>
+      <td><img width="240" src="https://zos.alipayobjects.com/rmsportal/ZYzaHsUQvaBwjUxppJeJ.png" /></td>
+      <td><img width="240" src="https://zos.alipayobjects.com/rmsportal/MNxGEDjQAnonUyXFPVWr.png" /></td>
+      <td><img width="240" src="https://zos.alipayobjects.com/rmsportal/yzgvXRkzujhxUznhvQdY.png" /></td>
+      <td><img width="240" src="https://zos.alipayobjects.com/rmsportal/hLYRBhMCJcfZZOFPuYuS.png" /></td>
+    </tr>
+  </tbody>
+</table>

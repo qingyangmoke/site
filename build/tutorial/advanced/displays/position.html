@@ -1,0 +1,12 @@
+<h1 id="位置">位置</h1>
+<p>在介绍 <code>Container</code> 时，我们看到所有的显示对象都顶在左上角。因为它们的坐标值 <code>x</code>、<code>y</code> 默认都是 0。你可以通过设置它们的 <code>x</code>、<code>y</code> 属性来更改它们的位置。现在我们来设置 <code>antSprite</code> 的<code>x</code>、<code>y</code> 属性：</p>
+<pre><code class=" js language- js">antSprite.x = 96;
+antSprite.y = 96;</code></pre>
+<p>这两行代码移动小蚂蚁右移 96 像素，下移 96 像素。效果如下图：</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/NgZLeAQYIJrVQlXzFJYo.png" alt="" /></p>
+<p>以小蚂蚁左上角作为 <code>x</code>、<code>y</code> 的锚点，要让它右移，那就增加 <code>x</code> 属性的值，让它下移，就增加 <code>y</code> 属性的值。如果 <code>x</code> 为 0，那就在场景的最左边，如果 <code>y</code> 为 0，就在场景的最上方。</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/JJlrfHQTRgvKEHkObkoV.png" alt="" /></p>
+<p>设置位置最优雅的姿势可以是这样的：</p>
+<pre><code class=" js language- js">antSprite.setPosition(96, 96);</code></pre>
+<p>如果 <code>x</code>、<code>y</code> 的值一样，可以直接这样：</p>
+<pre><code class=" js language- js">antSprite.setPosition(96);</code></pre>

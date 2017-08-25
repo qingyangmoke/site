@@ -1,0 +1,40 @@
+<h1 id="定时器">定时器</h1>
+<p>使用方法 <code>countDown</code> 便可以快速创建一个定时器：</p>
+<pre><code class=" js language- js">var ticker = new Tiny.ticker.Ticker();
+ticker.countDown({
+  duration: 3e3,
+  callback: function () {
+    console.log('每三秒打印一次');
+  }
+});
+ticker.start();</code></pre>
+<p>或使用 Ticker 的单例：</p>
+<pre><code class=" js language- js">var ticker = Tiny.ticker.shared;
+ticker.countDown({
+  duration: 3e3,
+  callback: function () {
+    console.log('每三秒打印一次');
+  }
+});
+// 单例在主调度中已经 start，故不用再执行 start()</code></pre>
+<h2 id="入参">入参</h2>
+<ul>
+<li><code>duration</code>：控制每次的间隔，单位是 ms。</li>
+<li><code>times</code>：次数，不传即无限次</li>
+<li><code>callback</code>：每次间隔的回调</li>
+<li><code>complete</code>：达到总次数后的回调</li>
+</ul>
+<pre><code class=" js language- js">ticker.countDown({
+  // 6 秒一次
+  duration: 6e3,
+  // 共 2 次
+  times: 2,
+  // 每 6 秒调用一次
+  callback: function() {
+    console.log('go on.');
+  },
+  // 6*2 秒后调用，完成
+  complete: function () {
+    console.log('time out.');
+  },
+});</code></pre>

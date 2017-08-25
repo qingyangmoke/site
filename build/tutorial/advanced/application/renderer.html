@@ -1,0 +1,30 @@
+<h1 id="renderer-对象">renderer 对象</h1>
+<h2 id="获取-renderer">获取 renderer</h2>
+<p>调用 <code>Application</code> 的实例化对象 app 的 <code>renderder</code> 属性即可获取，如：</p>
+<pre><code class=" js language- js">console.log(app.renderer);
+//=&gt; WebGLRenderer {_events: Events, _eventsCount: 2, type: 1, width: 320, height: 568…}</code></pre>
+<h2 id="使用-renderer">使用 renderer</h2>
+<h3 id="获取-canvas-对象">获取 canvas 对象</h3>
+<p>可以通过 <code>renderder.view</code> 获取 <code>&lt;canvas&gt;</code> 对象，这样你就可以像操作 Dom 一样操作 canvas 了，如：</p>
+<pre><code class=" js language- js">var viewer = app.renderer.view;
+console.log(viewer)
+//=&gt; &lt;canvas tabindex="99" id="TinyCanvas" style="outline: none; touch-action: none; width: 320px; height: 568px;" width="320" height="568"&gt;&lt;/canvas&gt;
+viewer.style.border = '1px solid red';</code></pre>
+<h3 id="获取渲染类型">获取渲染类型</h3>
+<p>如果你在启动参数里没有指定渲染类型，但是你又想在 app 运行后获知渲染类型，这是你可以这样来做：</p>
+<pre><code class=" js language- js">var isByWebGL = app.renderer instanceof Tiny.WebGLRenderer;
+console.log(isByWebGL)
+//=&gt; true</code></pre>
+<h3 id="其他操作">其他操作</h3>
+<p>如果需要，你可以在 app 初始化之后变更 canvas 的背景色，只要设置 <code>renderer</code> 的 <code>backgroundColor</code> 属性为任意的16进制颜色值。</p>
+<pre><code class=" js language- js">renderer.backgroundColor = 0x061639;</code></pre>
+<p>如果你想获取 <code>renderer</code> 的宽高，可以使用 <code>renderer.width</code> 或 <code>renderer.height</code>。<br />
+不过，建议你直接通过 <code>Tiny.WIN_SIZE</code> 对象获取。</p>
+<p>你也可以变更 canvas 的尺寸，使用 <code>renderer.resize(100, 100);</code> 即可，但是不建议你去变更。</p>
+<p>如果你想让 canvas 充满整个屏幕可视区域，你可以设置 canvas 对象的样式，同时重设 <code>renderer</code> 的尺寸，如：</p>
+<pre><code class=" js language- js">renderer.view.style.position = 'absolute';
+renderer.view.style.display = 'block';
+renderer.resize(window.innerWidth, window.innerHeight);</code></pre>
+<p>但是，不要忘记做 CSS reset：</p>
+<pre><code class=" css language- css">html, body, p, div {margin:0;padding:0;}</code></pre>
+<p>当然，还是不建议你这样去用，非特殊情况建议在 <code>Application</code> 初始化的时候，通过配置参数去设置尺寸。</p>

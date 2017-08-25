@@ -1,0 +1,51 @@
+<h1 id="画布扩展">画布扩展</h1>
+<blockquote>
+  <p>插件名：extract<br />
+  npm：tinyjs-plugin-extract</p>
+</blockquote>
+<p>通过 <code>renderer</code> 的插件 <code>extract</code> 对象可以获取画布相关的东东，比如：Image 对象、base64 格式的图片、像素值等等。下面我们分别介绍一下使用姿势：</p>
+<p>首先，创建一组精灵到舞台场景中：</p>
+<pre><code class=" js language- js">Tiny.Loader.add('https://a.alipayobjects.com/g/H5Promo/618-payment-promotion/1.0.4/res/images/mole_tile.json').load(function() {
+  // 支地鼠
+  var aliMole = new Tiny.Sprite(Tiny.TextureCache['ali_mole.png']);
+
+  // 堵车地鼠
+  var dcMole = new Tiny.Sprite(Tiny.TextureCache['dc_mole.png']);
+  dcMole.setPosition(40);
+
+  // 排队地鼠
+  var pdMole = new Tiny.Sprite(Tiny.TextureCache['pd_mole.png']);
+  pdMole.setPosition(80);
+
+  var moles = new Tiny.Container();
+  moles.addChild(aliMole);
+  moles.addChild(dcMole);
+  moles.addChild(pdMole);
+  app.run(moles);
+});</code></pre>
+<p>效果如下：</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/gqYyoEpDjNJkSkijfQDK.jpg@240w" alt="" /></p>
+<p>接着我们取到 <code>extract</code> 对象：</p>
+<pre><code class=" js language- js">var extract = app.renderer.plugins.extract;</code></pre>
+<h2 id="通过-pixels-方法获取像素值">通过 pixels 方法获取像素值</h2>
+<pre><code class=" js language- js">var data = extract.pixels(moles);
+console.log(data);
+//=&gt; Uint8Array(228480) [0, 0, 0, 0..]</code></pre>
+<h2 id="通过-canvas-方法获取-canvas-dom-对象">通过 canvas 方法获取 Canvas Dom 对象</h2>
+<pre><code class=" js language- js">var canvasDom = extract.canvas(moles);
+console.log(canvasDom);
+//=&gt; &lt;canvas width="240" height="238"&gt;&lt;/canvas&gt;</code></pre>
+<p>添加到 body 中看看：</p>
+<pre><code class=" js language- js">document.body.appendChild(canvasDom);</code></pre>
+<p>效果如下：</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/aKTFnpJRbqYvZQdFfIqs.png" alt="" /></p>
+<h2 id="通过-base64-方法获取-b64-格式图片">通过 base64 方法获取 b64 格式图片</h2>
+<pre><code class=" js language- js">var img = extract.base64(moles);
+console.log(img);
+//=&gt; data:image/png;base64,iVBORw0KGgoAAAANSUh..</code></pre>
+<h2 id="通过-image-方法获取-image-对象">通过 image 方法获取 Image 对象</h2>
+<pre><code class=" js language- js">var img = extract.image(moles);
+console.log(img);
+//=&gt; &lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUh.."&gt;</code></pre>
+<p>添加到 body 中和上面的效果一样。</p>
+<p>这些方法可以很方便将游戏中的某个/组显示对象转成图片格式，很适应于截屏。</p>

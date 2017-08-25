@@ -1,0 +1,8 @@
+<h1 id="eventemitter">EventEmitter</h1>
+<p>Tiny.js 使用了 <a href="https://github.com/primus/eventemitter3">eventemitter3</a>，你可以通过 <code>Tiny.EventEmitter</code> 获得，举个栗子：</p>
+<pre><code class=" js language- js">var EE = new Tiny.EventEmitter();
+EE.on('event', () =&gt; {
+  console.log('an event occurred!');
+});
+EE.emit('event');
+//=&gt; an event occurred!</code></pre>

@@ -1,0 +1,24 @@
+<h1 id="简单使用">简单使用</h1>
+<h2 id="创建">创建</h2>
+<p>可以直接使用单例：</p>
+<pre><code class=" js language- js">var ticker = Tiny.ticker.shared;</code></pre>
+<p>也可以实例化一个：</p>
+<pre><code class=" js language- js">var ticker = new Tiny.ticker.Ticker();</code></pre>
+<h2 id="添加移除">添加&amp;移除</h2>
+<p>直接用 <code>add</code> 方法添加一个回调函数：</p>
+<pre><code class=" js language- js">ticker.add(function (time) {
+  console.log(time);
+});</code></pre>
+<p>使用 <code>remove</code> 方法来移除它：</p>
+<pre><code class=" js language- js">var handler = function (time) {
+  console.log(time);
+}
+ticker.add(handler);
+ticker.remove(handler);</code></pre>
+<h2 id="开始停止">开始&amp;停止</h2>
+<p>实例化之后，可以用 <code>start</code> 方法开始，用 <code>stop</code> 方法来停止。</p>
+<p>也可以通过设置它的参数 <code>autoStart=true</code> 来自动开始。</p>
+<blockquote>
+  <p>注意</p>
+  <p>直接使用 <code>Tiny.ticker.shared</code> 的话，会自动开始。</p>
+</blockquote>

@@ -1,0 +1,15 @@
+<h1 id="tilingsprite">TilingSprite</h1>
+<blockquote>
+  <p>插件名：tiling<br />
+  npm：tinyjs-plugin-tiling</p>
+</blockquote>
+<p>平铺某个纹理，一般用于制作游戏中的地图，比较简单，直接看代码片段吧：</p>
+<pre><code class=" js language- js">var texture = Tiny.Texture.fromImage('https://zos.alipayobjects.com/rmsportal/qphRqMulIoaBUPQnfEBV.png');
+var tilingSprite = new Tiny.tiling.TilingSprite(texture, Tiny.WIN_SIZE.width, Tiny.WIN_SIZE.height);
+var container = new Tiny.Container();
+container.addChild(tilingSprite);
+app.run(container);</code></pre>
+<p>瓷砖的纹理图片：</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/qphRqMulIoaBUPQnfEBV.png" alt="" /></p>
+<p>代码片段执行后的效果：</p>
+<p><img src="https://zos.alipayobjects.com/rmsportal/DjAYKJgpQawrXQdwiwhJ.png@240w" alt="" /></p>

@@ -1,0 +1,20 @@
+<h1 id="滚动">滚动</h1>
+<blockquote>
+  <p>插件名：Scroller<br />
+  npm：tinyjs-plugin-scroller</p>
+</blockquote>
+<p>Tiny.js 使用了 <a href="https://github.com/pbakaus/scroller">scroller</a>，你可以通过 <code>Tiny.Scroller</code> 获得，举个栗子：</p>
+<pre><code class=" js language- js">var scrollerObj = new Tiny.Scroller(function(left, top, zoom) {
+    // apply coordinates/zooming
+}, {
+    scrollingY: false
+});</code></pre>
+<p>如果需要某个显示对象支持滚动，可以使用 <code>Tiny.Layer</code> 类来创建：</p>
+<pre><code class=" js language- js">var ant = Tiny.Sprite.fromImage('https://zos.alipayobjects.com/rmsportal/IJwbZnAkuJOhKqDXngUm.png');
+var layer = new Tiny.Layer();
+layer.setScroll(Tiny.WIN_SIZE.width, Tiny.WIN_SIZE.height);
+layer.setHitArea(new Tiny.Rectangle(0, 0, Tiny.WIN_SIZE.width, Tiny.WIN_SIZE.height));
+layer.container.addChild(ant);
+app.run(layer);</code></pre>
+<p>效果如下：</p>
+<video controls="" width="240" name="media"><source src="https://os.alipayobjects.com/rmsportal/bFFVRUvBOTPxikGWHWuV.mp4" type="video/mp4"></video>

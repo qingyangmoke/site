@@ -1,0 +1,25 @@
+<h1 id="多媒体">多媒体</h1>
+<h2 id="音频">音频</h2>
+<blockquote>
+  <p>插件名：audio<br />
+  npm：tinyjs-plugin-audio</p>
+</blockquote>
+<p>Tiny.js 提供了简单的音频操作姿势，由于各个浏览器的支持能力不一，一些高级姿势暂时还享受不到。使用 <code>Tiny.audioManager</code> 这个已经实例化的对象可以快速操作音频文件。</p>
+<pre><code class=" js language- js">Tiny.Loader.add([
+  {name: 'music', url: 'https://os.alipayobjects.com/rmsportal/aVTYsHoGDVBnqXKuYDrs.mp3'}
+]).load(function(){
+  var music = Tiny.audio.manager.getAudio('music');
+  music.loop = true; //设置循环播放
+  music.play(); //开始播放
+});</code></pre>
+<p>使用 <code>stop</code> 方法可以停止播放：</p>
+<pre><code class=" js language- js">music.stop();</code></pre>
+<blockquote>
+  <p>Tips</p>
+  <ul>
+  <li>一般情况下，使用音频时，同时提供 <code>ogg</code> 和 <code>mp3</code> 两种格式，根据浏览器的支持情况，自动切换，默认使用 <code>ogg</code> 格式；</li>
+  <li>引用时直接使用 <code>ogg</code> 资源即可，Tiny.js 会自动识别切换是否需要使用同目录下的 <code>mp3</code> 格式资源。</li>
+  </ul>
+</blockquote>
+<h2 id="视频">视频</h2>
+<p>todo</p>

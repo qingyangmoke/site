@@ -1,0 +1,14 @@
+<h1 id="键盘">键盘</h1>
+<blockquote>
+  <p>插件名：Keyboard<br />
+  npm：tinyjs-plugin-keyboard</p>
+</blockquote>
+<p>你可以使用 <code>Tiny.Keyboard</code> 类初始化一个键盘控制对象，然后设置"按下（<code>press</code>）"和"松开（<code>release</code>）"的回调监听。<br />
+现在，我们设置一下空格键的触发：</p>
+<pre><code class=" js language- js">var keySpace = new Tiny.Keyboard(32);
+keySpace.press = function (e) {
+   console.log('space pressed!')
+}
+keySpace.release = function (e) {
+   console.log('space released!')
+}</code></pre>

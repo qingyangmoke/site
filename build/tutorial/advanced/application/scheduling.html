@@ -1,0 +1,37 @@
+<h1 id="主调度">主调度</h1>
+<p>调用 <code>Application</code> 的实例化对象 app 的 <code>onUpdate</code> 方法就可以设置一个调度逻辑：</p>
+<pre><code class=" js language- js">app.onUpdate(function () {
+  sprite.setPositionX(sprite.getPositionX() + 0.1);
+});</code></pre>
+<p>上面的代码片段，精灵 <code>sprite</code> 会以每帧 0.1 像素的速度向右移动。<br />
+可以看出，这实际上就是游戏的主调度，每一帧你都可以增加其他逻辑，而且是任何时候、任何情况都可以调用，只要 <code>app.run(..)</code> 已经执行。</p>
+<p>两个？</p>
+<pre><code class=" js language- js">//设置一个调度逻辑
+app.onUpdate(function (t) {
+  console.log('one logic');
+});
+//再设置一个
+app.onUpdate(function (t) {
+  console.log('the other logic');
+});
+...</code></pre>
+<p>移除？使用方法 <code>offUpdate</code>：</p>
+<pre><code class=" js language- js">var fn = function() {
+  console.log('update.');
+}
+app.onUpdate(fn);
+// 将调度逻辑传入 offUpdate 即可
+app.offUpdate(fn);</code></pre>
+<blockquote>
+  <p>Tips</p>
+  <ul>
+  <li>关于开始 <code>start</code> 方法，实际上在执行 <code>app.run(..)</code> 时会自动调用；</li>
+  <li>不用担心 <code>onUpdate</code> 设置多个会不会有性能问题，放心，Tiny.js 会处理好。当然，也不能太多，每一帧处理太多的运算，帧频也会下降；</li>
+  <li><code>onUpdate</code> 的第一个入参是一个函数，而距离上一帧的时间间隔也会通过函数带回，上面代码片段的 <code>t</code> 就是。</li>
+  </ul>
+</blockquote>
+<h2 id="获取-fps">获取 FPS</h2>
+<p>你可以获取到主调度的 <code>FPS</code> 值：</p>
+<pre><code class=" js language- js">var fps = app.ticker.FPS;
+console.log(fps);
+//=&gt; 59.95203836702832</code></pre>

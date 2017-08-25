@@ -1,0 +1,55 @@
+<h1 id="ismobile">isMobile</h1>
+<p>Tiny.js 使用了 <a href="https://github.com/kaimallea/isMobile">isMobile</a>，你可以通过 <code>Tiny.isMobile</code> 获得，举个栗子：</p>
+<pre><code class=" js language- js">// 是否是 iPhone 设备
+var isIPhone = Tiny.isMobile.apple.phone
+//=&gt; true
+
+// 是否是 Android 设备
+var isAndroid = Tiny.isMobile.android.phone
+//=&gt; false</code></pre>
+<h2 id="所有类型">所有类型</h2>
+<pre><code class=" bash language- bash"># Apple devices
+apple
+  phone
+  ipod
+  tablet
+  device # any mobile Apple device
+
+# Android devices
+android
+  phone
+  tablet
+  device # any mobile Android device
+
+# Amazon Silk devices (also passes Android checks)
+amazon
+  phone
+  tablet
+  device
+
+# Windows devices
+windows
+  phone
+  tablet
+  device # any mobile Windows device
+
+# "Other" devices
+other
+  blackberry
+  blackberry10
+  opera # Opera Mini
+  firefox
+  chrome
+  device # any "Other" device
+
+# Specific seven inch devices
+seven_inch
+  # Nexus 7
+  # Kindle Fire
+  # Nook Tablet 7 inch
+  # Galaxy Tab 7 inch
+
+# Aggregate Groupings
+any # any device matched
+phone # any device in the 'phone' groups above
+tablet # any device in the 'tablet' groups above</code></pre>

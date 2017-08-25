@@ -1,0 +1,23 @@
+<h1 id="游戏控制">游戏控制</h1>
+<p>游戏整体的控制比较重要，当然，使用也很简单。</p>
+<p>让游戏停止：</p>
+<pre><code class=" js language- js">app.stop();</code></pre>
+<p>开始：</p>
+<pre><code class=" js language- js">app.start();</code></pre>
+<p>暂停：</p>
+<pre><code class=" js language- js">app.pause();</code></pre>
+<p>继续：</p>
+<pre><code class=" js language- js">app.resume();</code></pre>
+<blockquote>
+  <p>注意<br />
+  ⚠️⚠️⚠️ 这很重要，为避免移动端压后台引发的运行 Crash，需要你控制一下游戏，如：</p>
+<pre><code class=" js language- js">// 页面压后台，让游戏停下来
+document.addEventListener('pause', function (e) {
+  app.pause();
+}, false);
+
+// 页面恢复运行，让游戏继续
+document.addEventListener('resume', function (e) {
+  app.resume();
+}, false);</code></pre>
+</blockquote>

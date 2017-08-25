@@ -1,0 +1,20 @@
+<h1 id="多边形">多边形</h1>
+<p>你可以连接多条直线组合成一个多边形，并设置填充色，使用 <code>drawPolygon</code> 方法，它的参数是一组 x/y 位置点的数组。</p>
+<pre><code class=" js language- js">var path = [
+  point1X, point1Y,
+  point2X, point2Y,
+  point3X, point3Y
+];
+
+shapes.drawPolygon(path);</code></pre>
+<p><code>drawPolygon</code> 会连接这三个点，下面的代码片段连接三条直线来创建一个蓝色边框的红三角形：</p>
+<pre><code class=" js language- js">var triangle = new Tiny.Graphics();
+triangle.lineStyle(4, 0x66FF33, 1);
+triangle.beginFill(0xff0000);
+triangle.drawPolygon([
+  -32, 64, // 第一个点
+  32, 64, // 第二个点
+  0, 0, // 第三个点
+  -32, 64, // 回到第一个点闭合
+]);
+triangle.endFill();</code></pre>

@@ -1,0 +1,73 @@
+<h1 id="碰撞检测">碰撞检测</h1>
+<p>Tiny.js 提供多种 bound 检测方法，可以用来判断精灵之间的包含、碰撞情况。具体使用参看 API 文档，下面列出一些：</p>
+<table>
+<thead>
+<tr>
+<th id="方法名" style="text-align:right;">方法名</th>
+<th id="图解" style="text-align:center;">图解</th>
+<th id="描述" style="text-align:left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">rectContainsRect</td>
+<td style="text-align:center;"><img src="http://tfs.alipayobjects.com/images/rmsweb/T1hoXgXXNfXXXXXXXX.png" /></td>
+<td style="text-align:left;">检测一个显示对象是否在另一个显示对象内部</td>
+</tr>
+<tr>
+<td style="text-align:right;">rectContainsPoint</td>
+<td style="text-align:center;"><img src="http://tfs.alipayobjects.com/images/rmsweb/T1GENgXkRaXXXXXXXX.png" /></td>
+<td style="text-align:left;">检测一个点是否在一个显示对象内部</td>
+</tr>
+<tr>
+<td style="text-align:right;">rectIntersectsRect</td>
+<td style="text-align:center;"><img src="http://tfs.alipayobjects.com/images/rmsweb/T18.hgXoddXXXXXXXX.png" /></td>
+<td style="text-align:left;">检测两个显示对象是否相交，一般用于检测碰撞</td>
+</tr>
+<tr>
+<td style="text-align:right;">rectUnion</td>
+<td style="text-align:center;"><img src="http://tfs.alipayobjects.com/images/rmsweb/T1JD4gXhlfXXXXXXXX.png" /></td>
+<td style="text-align:left;">返回两个显示对象的总区域</td>
+</tr>
+<tr>
+<td style="text-align:right;">isPixelCollision</td>
+<td style="text-align:center;">／</td>
+<td style="text-align:left;">像素检测判断是否碰撞</td>
+</tr>
+</tbody>
+</table>
+<p>举个栗子：</p>
+<pre><code class="js language-js">var rect = new Tiny.Rectangle(10, 10, 50, 50);
+var p = new Tiny.Point(49, 62);
+Tiny.rectContainsPoint(rect, p);
+//=&gt; true</code></pre>
+<p>对于像素检测碰撞，使用的姿势稍微高级一点，这会涉及到很多的点，游戏 Demo 《Nohumanity》 中有使用，这里简单介绍一下。</p>
+<p>假设 hero、bomb 已经被创建并加到了舞台场景中，那么 <code>isPixelCollision</code> 的使用姿势如下：</p>
+<pre><code class=" js language- js">// 从 Application 的实例对象 app 中获取到 renderer 对象
+var renderer = app.renderer;
+// 通过 Tiny.extract 提供的 pixels 方法获取到 hero 的像素集
+hero.data = app.renderer.plugins.extract.pixels(hero);
+bomb.data = app.renderer.plugins.extract.pixels(bomb);
+// 检测
+var collide = Tiny.isPixelCollision(
+  hero,
+  hero.getPositionX(),
+  hero.getPositionY(),
+  true,
+  bomb,
+  bomb.getPositionX(),
+  bomb.getPositionY(),
+  false
+);
+if (collide) {
+  // 有碰撞
+} else {
+  // 没碰撞
+}</code></pre>
+<blockquote>
+  <p>注意</p>
+  <ul>
+  <li>代码中的 <code>extract</code> 对象不包含在默认库中，需要引用/安装插件：<code>tinyjs-plugin-extract</code>；</li>
+  <li>如果显示对象的透明度（Opacity）是0，那么不能通过像素检测碰撞情况的，因为 <code>pixels</code> 方法返回的数组里全是 0，所以这种情况必须要检测，建议设置透明度（setOpacity）为0.01或更低。</li>
+  </ul>
+</blockquote>

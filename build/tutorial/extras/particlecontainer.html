@@ -1,0 +1,40 @@
+<h1 id="particlecontainer">ParticleContainer</h1>
+<blockquote>
+  <p>插件名：particles<br />
+  npm：tinyjs-plugin-particles</p>
+</blockquote>
+<p><code>ParticleContainer</code> 是一个非常高性能的显示容器，任何在它里面的精灵渲染速度会比 <code>Container</code> 提升 2~5 倍。</p>
+<p>创建后的 ParticleContainer 可以就像使用 <code>Container</code> 一样来使用它。</p>
+<p>当然，速度获得了提升一定会有一定的妥协，就看你如何选择。<br />
+在 ParticleContainer 里的精灵仅仅有一些基本的属性：<code>x</code>、<code>y</code>、<code>width</code>、<code>height</code>、<code>scale</code>、<code>pivot</code>、<code>alpha</code>、<code>visible</code>，就这么多。<br />
+所以，你可能不能使用滤镜或混合模式，只能使用一个纹理（<strong>所以如果你想让精灵有不同的表现方式，你不得不更换雪碧图</strong>），当然，你可以在一个场景或项目中同时使用 <code>Container</code> 和 <code>ParticleContainer</code>，合理搭配来获得速度的提升，在满足基本需要时，这种妥协还是值得一试。</p>
+<p>那么，为何 ParticleContainer 可以这么快？<br />
+因为，精灵的位置是直接通过 GPU 来计算的。</p>
+<p>创建一个 ParticleContainer，有两个常用参数：第一个是可以承载的精灵最大个数，第二个是属性配置的对象：</p>
+<pre><code class=" js language- js">var pContainer = new Tiny.particles.ParticleContainer(size, options);</code></pre>
+<p>比如：</p>
+<pre><code class=" js language- js">var pContainer = new Tiny.particles.ParticleContainer({
+  rotation: true,
+  alpha: true,
+  scale: true,
+  uvs: true,
+});</code></pre>
+<blockquote>
+  <p>Tips:</p>
+  <ul>
+  <li>第一个参数 size 可以不用传，默认是 <code>1500</code>；</li>
+  <li>第二个参数 options 也可以不传，默认是 <code>{scale: false, position: true, rotation: false, uvs: false, alpha: false}</code>，如果需要变更 <code>scale</code> 等，就需要传入并设置为 <code>true</code>，如果不需要变更，就保持为 <code>false</code> 以获得更多的速度提升；</li>
+  <li><code>UVs</code> 是一个3D图表展示术语，它指纹理（图片）准备映射到三维表面的x和y的坐标。<code>U</code> 是 <code>x</code> 轴， <code>V</code> 是 <code>y</code> 轴。WebGL 用 <code>x</code>, <code>y</code> 和 <code>z</code> 来进行三维空间定位，所以 <code>U</code> 和 <code>V</code> 被选为表示2D图片纹理的 <code>x</code> 和 <code>y</code>；</li>
+  <li>所以，当在动画的时候需要改变它们纹理颗粒的时候你需要设置 <code>uvs</code> 为 true。</li>
+  </ul>
+</blockquote>
+<h2 id="获取-bound">获取 Bound</h2>
+<p>你无法直接通过实例化对象的 <code>width</code>、<code>height</code> 属性直接获取到 <code>ParticleContainer</code> 的宽高，这里提供一个快捷的方法 <code>getBounds</code>，它返回的是一个 <code>Tiny.Rectangle</code> 对象。</p>
+<pre><code class=" js language- js">var pContainer = new Tiny.particles.ParticleContainer();
+//...
+var bound = pContainer.getBounds();
+// =&gt; Rectangle {x: 14, y: 25, width: 555, height: 648, type: 1}</code></pre>
+<blockquote>
+  <p>注意</p>
+  <p>此方法要在所有子元素都渲染出来后才可以获取到准确的值，建议谨慎使用。</p>
+</blockquote>

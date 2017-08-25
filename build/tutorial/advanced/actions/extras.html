@@ -1,0 +1,27 @@
+<h1 id="扩展篇">扩展篇</h1>
+<p>Tiny.js 的动画是基于 <a href="https://github.com/tweenjs/tween.js">tween.js</a>，所以你可以直接使用 <code>Tiny.TWEEN</code> 暴露出来的 tween.js 的接口，使用它创造性的做出花样来。</p>
+<p>现在我们想要让精灵位置、缩放、旋转同时变化：</p>
+<pre><code class=" js language- js">const tween = new Tiny.TWEEN.Tween({
+...
+}).to({
+...
+}, duration)
+  .repeat(..)
+  .delay(..)
+  .easing(..)
+  .yoyo(..)
+  .interpolation(..)
+  .onUpdate(function () {
+  ...
+  })
+  .onComplete(function () {
+  ...
+  });
+tween.start();</code></pre>
+<p>然后，在 <code>onUpdate</code> 加上对精灵属性的变化：</p>
+<pre><code class=" js language- js">.onUpdate(function () {
+  sprite.setPosition(this.x, this.y);
+  sprite.setScale(this.scaleX, this.scaleY);
+  sprite.setRotation(this.rotation);
+  ...
+})</code></pre>

@@ -1,0 +1,10 @@
+<h1 id="位图文字">位图文字</h1>
+<blockquote>
+  <p>插件名：BitmapText<br />
+  npm：tinyjs-plugin-bitmap-text</p>
+</blockquote>
+<p>通过 <code>Tiny.BitmapText</code> 可以创建一个图片字体，当然，首先你要准备必要的资源文件：文字的图片和标记相关属性的 xml 文件，你可以在 <code>tests/TextTest.js</code> 里看到，下面的代码段就是使用姿势：</p>
+<pre><code class=" js language- js">var fontText = new Tiny.BitmapText('fnt fonts are supported!\ncreated by \n"Tiny.BitmapText()\n1234567890"', {
+  font: '32px Impact', //Impact 是字体的名称，是 xml 中 info 标签的 face 属性
+  tint: '0xff6600'
+});</code></pre>
